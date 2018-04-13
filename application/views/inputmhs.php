@@ -4,6 +4,7 @@
 <?php
 $this->load->view('bar/head');
 ?>
+
         <!-- Page wrapper  -->
         <div class="page-wrapper">
             <!-- Bread crumb -->
@@ -23,6 +24,18 @@ $this->load->view('bar/head');
                 <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-md-12">
+                        <?php 
+                        $sms = $this->session->flashdata('msg');
+                        if($this->session->userdata('msg') != ""){
+                            echo '
+                            <div class="alert alert-danger alert-dismissible fade show">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Error!</strong> '.$sms.'
+                            </div>
+                            ';
+                        }
+                        
+                        ?> 
                             <div class="card">
                                 <div class="card-body p-b-0">
                                     <!-- <h4 class="card-title">Customtab2 Tab</h4> -->

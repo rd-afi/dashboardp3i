@@ -2484,6 +2484,7 @@ textarea {
 .dataTables_length {
   margin-top: 10px;
 }
+
 .dataTables_length select {
   background-color: transparent;
   background-image: linear-gradient(#1976d2, #1976d2), linear-gradient(#b1b8bb, #b1b8bb);
@@ -2524,6 +2525,10 @@ textarea {
   box-shadow: none;
   outline: medium none;
   transition-duration: 0.3s;
+}
+table.dataTable.nowrap th,
+table.dataTable.nowrap td {
+	white-space:nowrap;
 }
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc,
@@ -5392,10 +5397,11 @@ label {
 thead tr th {
   color: #455a64;
   font-weight: 500;
+  text-align: center;
 }
-thead tr th:last-child {
+/*thead tr th:last-child {
   text-align: right;
-}
+}*/
 tbody tr th {
   color: #455a64;
   font-family: 'Poppins', sans-serif;
@@ -5405,16 +5411,16 @@ tbody tr td {
   font-family: 'Poppins', sans-serif;
   color: #99abb4;
 }
-tbody tr td:last-child {
+/*tbody tr td:last-child {
   text-align: right;
-}
+}*/
 .table > tbody > tr > td,
 .table > tbody > tr > th,
 .table > tfoot > tr > td,
 .table > tfoot > tr > th,
 .table > thead > tr > td,
 .table > thead > tr > th {
-  line-height: 32px;
+  line-height: 25px;
   vertical-align: top;
 }
 .table > thead > tr > th {

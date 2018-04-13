@@ -4,6 +4,7 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
  
 class m_datamhs extends CI_Model {
+
  
     public $table = 'mahasiswa';
     public $id = 'id';
@@ -11,6 +12,10 @@ class m_datamhs extends CI_Model {
  
     function __construct() {
         parent::__construct();
+    }
+
+    public function getdata(){
+        return $this->db->get('mahasiswa'); // Tampilkan semua data yang ada di tabel siswa
     }
  
     //ini untuk memasukkan kedalam tabel pegawai
@@ -45,3 +50,5 @@ class m_datamhs extends CI_Model {
                 $this->db->insert($this->table, $data);
             }
         }
+    }
+}
