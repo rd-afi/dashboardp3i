@@ -24,13 +24,17 @@ class login extends CI_Controller {
 			'username' => $username,
 			'password' => md5($password)
 			);
-		$cek = $this->m_login->cek_login("akun",$where)->num_rows();
-		if($cek > 0){
- 
+		$cek = $this->m_login->cek_login("akun",$where);
+		// $cek = $this->m_login->cek_login("akun",$where)->result();
+		if($cek->num_rows() > 0){
+ 			foreach($cek->result() as $data){
+
 			$data_session = array(
-				'nama' => $username,
-				'status' => "login"
+				'username' => $username,
+				'status' => "login",
+				'role' => $data->role
 				);
+ 			}
  
 			$this->session->set_userdata($data_session);
  

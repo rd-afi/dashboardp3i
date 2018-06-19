@@ -25,6 +25,18 @@ class dosen extends CI_Controller {
 		$this->load->view('dosen', $data);
 	}
 
+  public function tambahdosen()
+  {
+    $data['dosen'] = $this->m_datadsn->view();
+    // $data['user'] = $this->m_datadsn->tampil_data()->result();
+    // $this->load->view('dosen', array('error' => ' ' ));
+    $this->load->view('tambahdosen', $data);
+  }
+
+  public function download_template(){       
+    force_download('template/contoh_template_data_dosen.xlsx',NULL);
+  }
+
   public function aksi_upload(){
     $config['upload_path'] = './excel/';
     $config['allowed_types'] = 'xlsx';
@@ -67,7 +79,7 @@ class dosen extends CI_Controller {
       }
     }
     
-    $this->load->view('dosen', $data);
+    $this->load->view('tambahdosen', $data);
   }
   
   public function import(){

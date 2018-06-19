@@ -5032,7 +5032,7 @@ footer p {
 /*    Basic form
 ----------------------*/
 label {
-  font-weight: 400;
+  font-weight: 100;
   margin-bottom: 10px;
 }
 /*    Form Horizontal
@@ -5420,7 +5420,7 @@ tbody tr td {
 .table > tfoot > tr > th,
 .table > thead > tr > td,
 .table > thead > tr > th {
-  line-height: 25px;
+  line-height: 15px;
   vertical-align: top;
 }
 .table > thead > tr > th {

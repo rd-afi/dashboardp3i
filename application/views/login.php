@@ -49,7 +49,7 @@
                                         <label>Password</label>
                                         <input type="password" class="form-control" name="password" placeholder="Password">
                                     </div>
-                                    <div class="checkbox">
+                                    <!-- <div class="checkbox">
                                         <label>
         										<input type="checkbox"> Remember Me
         									</label>
@@ -57,7 +57,7 @@
         										<a href="#">Forgotten Password?</a>
         									</label>
 
-                                    </div>
+                                    </div> -->
                                     <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
                                     <!-- <div class="register-link m-t-15 text-center">
                                         <p>Don't have account ? <a href="#"> Sign Up Here</a></p>

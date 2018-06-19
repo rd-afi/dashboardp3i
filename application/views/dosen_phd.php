@@ -10,11 +10,11 @@ $this->load->view('bar/head');
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Data Mahasiswa</h3> </div>
+                    <h3 class="text-primary">Data Dosen Tamu</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Data Mahasiswa</li>
+                        <li class="breadcrumb-item active">Data Dosen Tamu</li>
                     </ol>
                 </div>
             </div>
@@ -42,29 +42,40 @@ $this->load->view('bar/head');
                                     <!-- Nav tabs -->
                                     <ul class="nav nav-tabs customtab2" role="tablist">
                                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Tabel</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#input" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Input</span></a> </li>
-                                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#upload" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Uploads</span></a> </li>
                                     </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab" role="tabpanel">
                                             <div class="p-20">
-                                                <h5>Best Clean Tab ever</h5>
-                                                <h6>you can use it with the small code</h6>
-                                                <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a.</p>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane p-20" id="input" role="tabpanel">2</div>
-                                        <div class="tab-pane" id="upload" role="tabpanel">
-                                            <div class="p-20">
-                                                <form action="<?php echo base_url();?>datamhs/upload/" method="post" enctype="multipart/form-data">
-                                                    <div class="button-list">
-                                                        <div class="btn-group">
-                                                            <input class="btn btn-success" type="file" name="file"/>
-                                                            <input class="btn btn-primary" type="submit" value="Upload file"/>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                <table id="myTable" class="table table-responsive table-striped table-bordered table-hover display nowrap" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Name</th>
+                                                <th>Join University</th>
+                                                <th>Degree</th>
+                                                <th>Country</th>
+                                                <th>Full Time</th>
+                                                <th>Part Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php 
+                                            $no = 1;
+                                            foreach($dosen_phd as $d){ 
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $d->no ?></td>
+                                                <td><?php echo $d->name ?></td>
+                                                <td><?php echo $d->joinUniv ?></td>
+                                                <td><?php echo $d->degree ?></td>
+                                                <td><?php echo $d->country ?></td>
+                                                <td><?php echo $d->fulltime ?></td>
+                                                <td><?php echo $d->parttime ?></td>
+                                            </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
                                             </div>
                                         </div>
                                     </div>
@@ -88,3 +99,10 @@ $this->load->view('bar/head');
 <?php
 $this->load->view('bar/js');
 ?>
+
+<script>
+    var table;
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    } );
+</script>

@@ -10,7 +10,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url('assets/images/favicon.png') ?>">
     <title>Dashboard</title>
 
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/lib/chartist/chartist.min.css') ?>"/>
+    <!-- <link rel="stylesheet" href="<?php echo base_url('assets/css/lib/chartist/chartist.min.css') ?>"/> -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/lib/owl.carousel.min.css') ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/lib/owl.theme.default.min.css') ?>"/>
     <!-- Bootstrap Core CSS -->
@@ -33,10 +33,10 @@
 
 <body class="fix-header fix-sidebar">
     <!-- Preloader - style you can find in spinners.css -->
-    <div class="preloader">
+    <!-- <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
-    </div>
+    </div> -->
     <!-- Main wrapper  -->
     <div id="main-wrapper">
         <!-- header header  -->
@@ -46,10 +46,10 @@
                 <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo site_url('dashboard') ?>">
                         <!-- Logo icon -->
-                        <b><img src="<?php echo base_url('assets/images/logo.png') ?>" alt="homepage" class="dark-logo" /></b>
+                        <b><img src="<?php echo base_url('assets/images/logo.jpg') ?>" alt="homepage" width="40px" class="dark-logo" /></b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
-                        <span><img src="<?php echo base_url('assets/images/logo-text.png') ?>" alt="homepage" class="dark-logo" /></span>
+                        <span><img src="<?php echo base_url('assets/images/logo-text.jpg') ?>" alt="homepage" width="100px" class="dark-logo" /></span>
                     </a>
                 </div>
                 <!-- End Logo -->
@@ -71,10 +71,11 @@
                             <a class="nav-link dropdown-toggle text-muted  " href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="<?php echo base_url('assets/images/users/5.jpg') ?>" alt="user" class="profile-pic" /></a>
                             <div class="dropdown-menu dropdown-menu-right animated zoomIn">
                                 <ul class="dropdown-user">
-                                    <li><a href="#"><i class="ti-user"></i> Profile</a></li>
+                                    <!-- <li><a href="#"><i class="ti-user"></i> Profile</a></li>
                                     <li><a href="#"><i class="ti-wallet"></i> Balance</a></li>
                                     <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Setting</a></li>
+                                    <li><a href="#"><i class="ti-settings"></i> Setting</a></li> -->
+                                    <li><a href=""><i class="ti-user"></i> <?php echo $_SESSION['username'] ?></a></li>
                                     <li><a href="<?php echo site_url('login/logout') ?>"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
@@ -98,16 +99,104 @@
                         <li class="nav-label">APPS</li>
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Data</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="<?php echo site_url('datamhs') ?>">Data Mahasiswa</a></li>
-                                <li><a href="<?php echo site_url('dosen') ?>">Data Dosen</a></li>
-                                <li><a href="<?php echo site_url('dosen_tamu') ?>">Data Dosen Tamu</a></li>
+
+                                <?php if ($_SESSION['username'] == 'admin') { ?>
+
+                                <li> <a class="has-arrow" href="#" aria-expanded="false">Data Mahasiswa (SISFO)</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('mahasiswa') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('mahasiswa/tambah') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <li> <a class="has-arrow" href="#" aria-expanded="false">Data Mahasiswa (IO)</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('mahasiswa_io') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('mahasiswa/tambah_io') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <li> <a class="has-arrow" href="#" aria-expanded="false">Data Dosen</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('dosen') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('dosen/tambah') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <?php } elseif ($_SESSION['username'] == 'sisfo') { ?>
+                                    
+                                <li> <a class="has-arrow" href="#" aria-expanded="false">Data Mahasiswa (SISFO)</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('mahasiswa') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('mahasiswa/tambah') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li>
+
+                            <?php } elseif ($_SESSION['username'] == 'io') { ?>
+
+                                <li> <a class="has-arrow" href="#" aria-expanded="false">Data Mahasiswa (IO)</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('mahasiswa_io') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('mahasiswa/tambah_io') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">Visiting International Faculty Staff</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        
+                                
+                                <li> <a class="has-arrow" href="#" aria-expanded="false">Inbound</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('dosen_tamu') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('dosen_tamu/tambah') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li>
+
+                                    </ul>
+                                </li>
+                                <?php } elseif ($_SESSION['username'] == 'icao') { ?>
+                                    <li> <a class="has-arrow" href="#" aria-expanded="false">International Faculty Staff</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('dosen') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('dosen/tambah') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <li> <a class="has-arrow  " href="#" aria-expanded="false"><span class="hide-menu">Visiting International Faculty Staff</span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        
+                                
+                                <li> <a class="has-arrow" href="#" aria-expanded="false">Inbound</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('dosen_tamu') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('dosen_tamu/tambah') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li>
+
+                                    </ul>
+                                </li>
+                                <?php } ?>
+                                
+                                <!-- <li> <a class="has-arrow" href="#" aria-expanded="false">Data Dosen Phd</a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        <li><a href="<?php echo site_url('dosen_phd') ?>" aria-expanded="false"><i class="fa fa-table"></i><span> Tabel</span></a></li>
+                                        <li><a href="<?php echo site_url('dosen_phd/tambah') ?>" aria-expanded="false"><i class="fa fa-plus"></i><span> Tambah Data</span></a></li>
+                                    </ul>
+                                </li> -->
                             </ul>
                         </li>
+
+                        <?php if ($_SESSION['username'] == 'admin') { ?>
+
                         <li> <a class="has-arrow  " href="#" aria-expanded="false"><i class="fa fa-wpforms"></i><span class="hide-menu">QS AUR</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo site_url('isiqsaurp3i') ?>">Indikator QS AUR</a></li>
                             </ul>
                         </li>
+
+                        <?php } ?>
+
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

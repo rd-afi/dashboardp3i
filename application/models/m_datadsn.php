@@ -35,4 +35,56 @@ class m_datadsn extends CI_Model {
 	public function insert_multiple($data){
 		$this->db->insert_batch('dosen', $data);
 	}
+
+	//FACULTY STAFF
+	// International Faculty Staff
+	public function get_number_of_international_staff(){
+        $query=$this->db->query("SELECT nip FROM dosen WHERE NOT (kewarganegaraan = 'WNI' or kewarganegaraan = 'INDONESIA') GROUP BY nip");
+         return $query;
+    }
+
+    // Visiting International Faculty Staff - Inbound
+    public function get_number_of_visiting_international_inbound_parttime(){
+        $query=$this->db->query("SELECT nama, negara_asal FROM dosen_tamu WHERE NOT negara_asal = 'Indonesia' GROUP BY nama");
+         return $query;
+    }
+
+    // Visiting International Faculty Staff - Outbound
+
+
+    // Staff with PhD
+    public function get_number_of_faculty_staff_phd_fulltime(){
+        $query=$this->db->query("SELECT nip FROM dosen WHERE pendidikan = 'S3' AND NOT employeestatus = 'DOSEN PROFESIONAL PART TIME' GROUP BY nip");
+         return $query;
+    }
+    public function get_number_of_faculty_staff_phd_dosen_part(){
+        $query=$this->db->query("SELECT nip FROM dosen WHERE pendidikan = 'S3' AND employeestatus = 'DOSEN PROFESIONAL PART TIME' GROUP BY nip");
+         return $query;
+    }
+    public function get_number_of_faculty_staff_phd_tamu_part(){
+        $query=$this->db->query("SELECT nama FROM dosen_tamu WHERE nama LIKE 'Dr.%' OR nama LIKE 'Prof.%' OR nama LIKE '%Ph.d' OR nama LIKE '%PhD' OR pendidikan_terakhir = 'S3' GROUP BY nama");
+         return $query;
+    }
+
+
+    // Faculty Staff
+    public function get_number_of_faculty_staff_fulltime(){
+        $query=$this->db->query("SELECT nip FROM dosen WHERE NOT pendidikan = ' ' GROUP BY nip");
+         return $query;
+    }
+
+    public function get_number_of_faculty_staff_parttime_dosen(){
+        $query=$this->db->query("SELECT nip FROM dosen WHERE (employeestatus = 'DOSEN PROFESIONAL PART TIME') AND (NOT pendidikan = ' ') GROUP BY nip");
+         return $query;
+    }
+    public function get_number_of_faculty_staff_parttime_tamu(){
+        $query=$this->db->query("SELECT nama FROM dosen_tamu GROUP BY nama");
+         return $query;
+    }
+    // public function get_number_of_faculty_staff(){
+    //     $query=$this->db->query("SELECT dosen_tamu.nama FROM dosen JOIN dosen_tamu WHERE NOT pendidikan = ' ' GROUP BY dosen_tamu.nama");
+    //      return $query;
+    // }
+
+
 }

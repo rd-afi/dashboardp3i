@@ -25,6 +25,18 @@ class dosen_tamu extends CI_Controller {
 		$this->load->view('dosen_tamu', $data);
 	}
 
+  public function tambahdosen()
+  {
+    $data['dosen_tamu'] = $this->m_datadsn_tamu->view();
+    // $data['user'] = $this->m_datadsn->tampil_data()->result();
+    // $this->load->view('dosen', array('error' => ' ' ));
+    $this->load->view('tambahdosen_tamu', $data);
+  }
+
+  public function download_template(){       
+    force_download('template/contoh_template_data_dosen_tamu.xlsx',NULL);
+  }
+
   public function aksi_upload(){
     $config['upload_path'] = './excel/';
     $config['allowed_types'] = 'xlsx';
@@ -67,7 +79,7 @@ class dosen_tamu extends CI_Controller {
       }
     }
     $data['dosen_tamu'] = $this->m_datadsn_tamu->view();
-    $this->load->view('dosen_tamu', $data);
+    $this->load->view('tambahdosen_tamu', $data);
   }
   
   public function import(){
@@ -98,7 +110,7 @@ class dosen_tamu extends CI_Controller {
           'pendidikan_terakhir' => $row['G'], // Ambil data alamat
           'tgl_pelaksanaan' => $row['H'], // Ambil data alamat
           'uraian_kegiatan' => $row['I'], // Ambil data alamat
-          'tempat' => $row['J'], // Ambil data tempat
+          'tempat' => $row['J'] // Ambil data tempat
         ]);
       }
       
