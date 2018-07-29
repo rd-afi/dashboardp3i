@@ -15,7 +15,7 @@ class m_datadsn extends CI_Model {
 		
 		$config['upload_path'] = './excel/';
 		$config['allowed_types'] = 'xlsx';
-		$config['max_size']	= '2048';
+		$config['max_size']	= '10240';
 		$config['overwrite'] = true;
 		$config['file_name'] = $filename;
 	
@@ -36,16 +36,58 @@ class m_datadsn extends CI_Model {
 		$this->db->insert_batch('dosen', $data);
 	}
 
+    function get_dsn ($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+        $query=$this->db->query("SELECT * FROM dosen where ((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))")->result();
+        } else if ($semester == "21") {
+        $query=$this->db->query("SELECT * FROM dosen where ((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))")->result();
+        }
+        return $query;
+    }
+
 	//FACULTY STAFF
 	// International Faculty Staff
-	public function get_number_of_international_staff(){
-        $query=$this->db->query("SELECT nip FROM dosen WHERE NOT (kewarganegaraan = 'WNI' or kewarganegaraan = 'INDONESIA') GROUP BY nip");
+	public function get_number_of_international_staff($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))";
+        } else if ($semester == "21") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))";
+        } 
+        $query=$this->db->query("SELECT nip FROM dosen WHERE ".$where." AND NOT (country_of_origin = 'WNI' or country_of_origin = 'INDONESIA') GROUP BY nip");
+        // $query=$this->db->query("SELECT nip FROM dosen WHERE NOT (country_of_origin = 'WNI' or country_of_origin = 'INDONESIA') GROUP BY nip");
          return $query;
     }
 
     // Visiting International Faculty Staff - Inbound
-    public function get_number_of_visiting_international_inbound_parttime(){
-        $query=$this->db->query("SELECT nama, negara_asal FROM dosen_tamu WHERE NOT negara_asal = 'Indonesia' GROUP BY nama");
+    public function get_number_of_visiting_international_inbound_parttime($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))";
+        } else if ($semester == "21") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))";
+        } 
+        $query=$this->db->query("SELECT name, country_of_origin FROM dosen_tamu WHERE ".$where." AND NOT country_of_origin = 'Indonesia' GROUP BY name");
+        // $query=$this->db->query("SELECT name, country_of_origin FROM dosen_tamu WHERE NOT country_of_origin = 'Indonesia' GROUP BY name");
          return $query;
     }
 
@@ -53,36 +95,116 @@ class m_datadsn extends CI_Model {
 
 
     // Staff with PhD
-    public function get_number_of_faculty_staff_phd_fulltime(){
-        $query=$this->db->query("SELECT nip FROM dosen WHERE pendidikan = 'S3' AND NOT employeestatus = 'DOSEN PROFESIONAL PART TIME' GROUP BY nip");
+    public function get_number_of_faculty_staff_phd_fulltime($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))";
+        } else if ($semester == "21") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))";
+        } 
+        $query=$this->db->query("SELECT * FROM dosen WHERE ".$where." AND education = 'S3' GROUP BY nip");
+        // $query=$this->db->query("SELECT * FROM dosen WHERE education = 'S3' GROUP BY nip");
+        // $query=$this->db->query("SELECT * FROM dosen WHERE education = 'S3' AND NOT employee_status = 'DOSEN PROFESIONAL PART TIME' GROUP BY nip");
          return $query;
     }
-    public function get_number_of_faculty_staff_phd_dosen_part(){
-        $query=$this->db->query("SELECT nip FROM dosen WHERE pendidikan = 'S3' AND employeestatus = 'DOSEN PROFESIONAL PART TIME' GROUP BY nip");
+    public function get_number_of_faculty_staff_phd_dosen_part($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))";
+        } else if ($semester == "21") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))";
+        } 
+        $query=$this->db->query("SELECT * FROM dosen WHERE ".$where." AND education = 'S3' AND employee_status = 'DOSEN PROFESIONAL PART TIME' GROUP BY nip");
+        // $query=$this->db->query("SELECT * FROM dosen WHERE education = 'S3' AND employee_status = 'DOSEN PROFESIONAL PART TIME' GROUP BY nip");
          return $query;
     }
-    public function get_number_of_faculty_staff_phd_tamu_part(){
-        $query=$this->db->query("SELECT nama FROM dosen_tamu WHERE nama LIKE 'Dr.%' OR nama LIKE 'Prof.%' OR nama LIKE '%Ph.d' OR nama LIKE '%PhD' OR pendidikan_terakhir = 'S3' GROUP BY nama");
+    public function get_number_of_faculty_staff_phd_tamu_part($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))";
+        } else if ($semester == "21") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))";
+        } 
+        $query=$this->db->query("SELECT * FROM dosen_tamu WHERE ".$where." AND name LIKE 'Dr.%' OR name LIKE 'Prof.%' OR name LIKE '%Ph.d' OR name LIKE '%PhD' OR education = 'S3' GROUP BY name");
+        // $query=$this->db->query("SELECT * FROM dosen_tamu WHERE name LIKE 'Dr.%' OR name LIKE 'Prof.%' OR name LIKE '%Ph.d' OR name LIKE '%PhD' OR education = 'S3' GROUP BY name");
          return $query;
     }
 
 
     // Faculty Staff
-    public function get_number_of_faculty_staff_fulltime(){
-        $query=$this->db->query("SELECT nip FROM dosen WHERE NOT pendidikan = ' ' GROUP BY nip");
+    public function get_number_of_faculty_staff_fulltime($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))";
+        } else if ($semester == "21") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))";
+        } 
+        $query=$this->db->query("SELECT * FROM dosen WHERE ".$where." GROUP BY nip");
+        // $query=$this->db->query("SELECT * FROM dosen GROUP BY nip");
+        // $query=$this->db->query("SELECT * FROM dosen WHERE NOT education = ' ' GROUP BY nip");
          return $query;
     }
 
-    public function get_number_of_faculty_staff_parttime_dosen(){
-        $query=$this->db->query("SELECT nip FROM dosen WHERE (employeestatus = 'DOSEN PROFESIONAL PART TIME') AND (NOT pendidikan = ' ') GROUP BY nip");
+    public function get_number_of_faculty_staff_parttime_dosen($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))";
+        } else if ($semester == "21") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))";
+        } 
+        $query=$this->db->query("SELECT * FROM dosen WHERE ".$where." AND (employee_status = 'DOSEN PROFESIONAL PART TIME') AND (NOT education = ' ') GROUP BY nip");
+        // $query=$this->db->query("SELECT * FROM dosen WHERE (employee_status = 'DOSEN PROFESIONAL PART TIME') AND (NOT education = ' ') GROUP BY nip");
          return $query;
     }
-    public function get_number_of_faculty_staff_parttime_tamu(){
-        $query=$this->db->query("SELECT nama FROM dosen_tamu GROUP BY nama");
+    public function get_number_of_faculty_staff_parttime_tamu($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))";
+        } else if ($semester == "21") {
+            $where = "((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))";
+        } 
+        $query=$this->db->query("SELECT * FROM dosen_tamu WHERE ".$where." GROUP BY name");
+        // $query=$this->db->query("SELECT * FROM dosen_tamu GROUP BY name");
          return $query;
     }
     // public function get_number_of_faculty_staff(){
-    //     $query=$this->db->query("SELECT dosen_tamu.nama FROM dosen JOIN dosen_tamu WHERE NOT pendidikan = ' ' GROUP BY dosen_tamu.nama");
+    //     $query=$this->db->query("SELECT dosen_tamu.name FROM dosen JOIN dosen_tamu WHERE NOT education = ' ' GROUP BY dosen_tamu.name");
     //      return $query;
     // }
 

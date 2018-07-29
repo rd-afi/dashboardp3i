@@ -35,4 +35,20 @@ class m_datadsn_tamu extends CI_Model {
 	public function insert_multiple($data){
 		$this->db->insert_batch('dosen_tamu', $data);
 	}
+
+    function get_dsn_tamu($semester,$tahun){
+        $year = substr($tahun, -2);
+        $year1 = $year+1;
+        $year2 = $year1+1;
+        $smt = $semester;
+        $gan = substr($smt, 0, -1);
+        $gen = substr($smt, -1);    
+
+        if ($semester == "12") {
+        $query=$this->db->query("SELECT * FROM dosen_tamu where ((schoolyear = ".$year.$year1." AND semester = ".$gen.") OR (schoolyear = ".$year.$year1." AND semester = ".$gan."))")->result();
+        } else if ($semester == "21") {
+        $query=$this->db->query("SELECT * FROM dosen_tamu where ((schoolyear = ".$year.$year1." AND semester = ".$gan.") OR (schoolyear = ".$year1.$year2." AND semester = ".$gen."))")->result();
+        }
+        return $query;
+    }
 }

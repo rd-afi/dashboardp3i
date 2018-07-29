@@ -25,9 +25,10 @@ $this->load->view('bar/head');
             <div class="card-content">
                 <div class="alert alert-secondary">
                     <h4 class="alert-heading"><b>PERHATIAN!</b></h4>
-                    Sebelum melakukan upload file excel silahkan untuk mendownload dan menyesuaikan template berikut ini.
+                    Sebelum melakukan upload file excel silahkan untuk mendownload petunjuk dan template berikut ini.
                     <p></p>
                     <hr>
+                    <a href="<?php echo base_url().'template_dosen' ?>" class="btn btn-warning m-b-10 m-l-5 btn-sm">Download Petunjuk</a>
                     <a href="<?php echo base_url().'template_dosen' ?>" class="btn btn-warning m-b-10 m-l-5 btn-sm">Download Template</a>
                 </div>
             </div>
@@ -90,15 +91,14 @@ $this->load->view('bar/head');
                                                 <table id='myTable' class='table table-responsive table-striped table-bordered table-hover display nowrap' style='width:100%'>
                                                     <thead>
                                                         <tr>
+                                                            <th>School Year</th>
+                                                            <th>Semester</th>
                                                             <th>NIP</th>
-                                                            <th>Nama</th>
-                                                            <th>Posisi</th>
-                                                            <th>Status Pegawai</th>
-                                                            <th>SK Pertama</th>
-                                                            <th>SK Posisi</th>
-                                                            <th>TMT</th>
-                                                            <th>Pendidikan</th>
-                                                            <th>Kewarganegaraan</th>
+                                                            <th>Name</th>
+                                                            <th>Position</th>
+                                                            <th>Employee Status</th>
+                                                            <th>Education</th>
+                                                            <th>Country of Origin</th>
                                                         </tr>
                                                     </thead>";
                                                 
@@ -109,50 +109,46 @@ $this->load->view('bar/head');
                                                 // $sheet adalah variabel yang dikirim dari controller
                                                 foreach($sheet as $row){ 
                                                     // Ambil data pada excel sesuai Kolom
-                                                    $nip = $row['A']; // Ambil data nama
-                                                    $nama = $row['B']; // Ambil data gender
-                                                    $posisi = $row['C']; // Ambil data jenis kelamin
-                                                    $employeestatus = $row['D']; // Ambil data alamat
-                                                    $sk_pertama = $row['E']; // Ambil data alamat
-                                                    $sk_posisi = $row['F']; // Ambil data alamat
-                                                    $tmt = $row['G']; // Ambil data alamat
-                                                    $pendidikan = $row['H']; // Ambil data alamat
-                                                    $kewarganegaraan = $row['I']; // Ambil data alamat
+                                                    $schoolyear = $row['A'];
+                                                    $semester = $row['B'];
+                                                    $nip = $row['C'];
+                                                    $name = $row['D'];
+                                                    $position = $row['E'];
+                                                    $employee_status = $row['F'];
+                                                    $education = $row['G'];
+                                                    $country_of_origin = $row['H'];
                                                     
                                                     // Cek jika semua data tidak diisi
-                                                    if(empty($nip) && empty($nama) && empty($posisi) && empty($employeestatus) && empty($sk_pertama) && empty($sk_posisi) && empty($tmt) && empty($pendidikan) && empty($kewarganegaraan))
+                                                    if(empty($schoolyear) && empty($semester) && empty($nip) && empty($name) && empty($position) && empty($employee_status) && empty($education) && empty($country_of_origin))
                                                         continue; // Lewat data pada baris ini (masuk ke looping selanjutnya / baris selanjutnya)
                                                     
                                                     // Cek $numrow apakah lebih dari 1
                                                     // Artinya karena baris pertama adalah nama-nama kolom
-                                                    // Jadi dilewat saja, tidak usah diimport
                                                     if($numrow > 1){
-                                                        // Validasi apakah semua data telah diisi
-                                                        $nip_td = ( ! empty($nip))? "" : " style='background: #E07171;'"; // Jika Nama kosong, beri warna merah
-                                                        $nama_td = ( ! empty($nama))? "" : " style='background: #E07171;'"; // Jika Jenis Kelamin kosong, beri warna merah
-                                                        $posisi_td = ( ! empty($posisi))? "" : " style='background: #E07171;'"; // Jika Negara Asal kosong, beri warna merah
-                                                        $employeestatus_td = ( ! empty($employeestatus))? "" : " style='background: #E07171;'"; // Jika Nama Perusahaan kosong, beri warna merah
-                                                        $sk_pertama_td = ( ! empty($sk_pertama))? "" : " style='background: #E07171;'"; // Jika Nama Kegiatan kosong, beri warna merah
-                                                        $sk_posisi_td = ( ! empty($sk_posisi))? "" : " style='background: #E07171;'"; // Jika Jabtan kosong, beri warna merah
-                                                        $tmt_td = ( ! empty($tmt))? "" : " style='background: #E07171;'"; // Jika Pendidikan Terakhir kosong, beri warna merah
-                                                        $pendidikan_td = ( ! empty($pendidikan))? "" : " style='background: #E07171;'"; // Jika Tanggal Pelaksanaan kosong, beri warna merah
-                                                        $kewarganegaraan_td = ( ! empty($kewarganegaraan))? "" : " style='background: #E07171;'"; // Jika Uraian Kegiatan kosong, beri warna merah
+                                                        // Validasi apakah semua data telah diisi, jika data kosong kolom akan diberi warna merah
+                                                        $schoolyear_td = ( ! empty($schoolyear))? "" : " style='background: #E07171;'";
+                                                        $semester_td = ( ! empty($semester))? "" : " style='background: #E07171;'";
+                                                        $nip_td = ( ! empty($nip))? "" : " style='background: #E07171;'";
+                                                        $name_td = ( ! empty($name))? "" : " style='background: #E07171;'";
+                                                        $position_td = ( ! empty($position))? "" : " style='background: #E07171;'";
+                                                        $employee_status_td = ( ! empty($employee_status))? "" : " style='background: #E07171;'";
+                                                        $education_td = ( ! empty($education))? "" : " style='background: #E07171;'";
+                                                        $country_of_origin_td = ( ! empty($country_of_origin))? "" : " style='background: #E07171;'";
                                                         
                                                         // Jika salah satu data ada yang kosong
-                                                        if(empty($nip) or empty($nama) or empty($posisi) or empty($employeestatus) or empty($sk_pertama) or empty($sk_posisi) or empty($tmt) or empty($pendidikan) or empty($kewarganegaraan)){
+                                                        if(empty($nip) or empty($name) or empty($position) or empty($employee_status) or empty($education) or empty($country_of_origin)){
                                                             $kosong++; // Tambah 1 variabel $kosong
                                                         }
                                                         
                                                         echo "<tr>";
+                                                        echo "<td".$schoolyear_td.">".$schoolyear."</td>";
+                                                        echo "<td".$semester_td.">".$semester."</td>";
                                                         echo "<td".$nip_td.">".$nip."</td>";
-                                                        echo "<td".$nama_td.">".$nama."</td>";
-                                                        echo "<td".$posisi_td.">".$posisi."</td>";
-                                                        echo "<td".$employeestatus_td.">".$employeestatus."</td>";
-                                                        echo "<td".$sk_pertama_td.">".$sk_pertama."</td>";
-                                                        echo "<td".$sk_posisi_td.">".$sk_posisi."</td>";
-                                                        echo "<td".$tmt_td.">".$tmt."</td>";
-                                                        echo "<td".$pendidikan_td.">".$pendidikan."</td>";
-                                                        echo "<td".$kewarganegaraan_td.">".$kewarganegaraan."</td>";
+                                                        echo "<td".$name_td.">".$name."</td>";
+                                                        echo "<td".$position_td.">".$position."</td>";
+                                                        echo "<td".$employee_status_td.">".$employee_status."</td>";
+                                                        echo "<td".$education_td.">".$education."</td>";
+                                                        echo "<td".$country_of_origin_td.">".$country_of_origin."</td>";
                                                         echo "</tr>";
                                                     }
                                                     
@@ -179,8 +175,8 @@ $this->load->view('bar/head');
                                                     echo "<hr>";
                                                     
                                                     // Buat sebuah tombol untuk mengimport data ke database
-                                                    echo "<button class='btn btn-success btn-default' type='submit' name='import'>Import</button>";
-                                                    echo "<button href='".base_url("dosen/tambah")."' class='btn btn-danger btn-default' type='submit' name='import'>Cancel</button>";
+                                                    echo "<button href='".base_url("dosen/tambah")."' class='btn btn-danger btn-default' type='submit' name='cancel'>Cancel</button>";
+                                                    echo "<button class='btn btn-primary btn-default pull-right' style='margin-left:10px;' type='submit' name='import'>Import</button>";
                                                     // echo "<a href='".base_url("dosen/tambah")."'>Cancel</a>";
                                                 // }
                                                 
@@ -202,7 +198,7 @@ $this->load->view('bar/head');
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2018 All rights reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

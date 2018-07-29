@@ -17,13 +17,28 @@ class dosen extends CI_Controller {
 
 	}
 
-	public function index()
-	{
+  public function index(){
+    if (date('m')<=6) {
+      $smt = "12";
+    } else {
+      $smt = "21";
+    }
+    ini_set('memory_limit', '-1');
     $data['dosen'] = $this->m_datadsn->view();
-    // $data['user'] = $this->m_datadsn->tampil_data()->result();
-    // $this->load->view('dosen', array('error' => ' ' ));
-		$this->load->view('dosen', $data);
-	}
+      if(isset($_POST['semester']) && isset($_POST['tahun'])){
+        $data['semester'] = $this->input->post('semester');
+        $data['tahun'] = $this->input->post('tahun');
+        $semester = $this->input->post('semester');
+        $tahun = $this->input->post('tahun');
+        $data['dsn'] = $this->m_datadsn->get_dsn($semester,$tahun);
+      }else{
+        // $data['bulan'] = date('F');
+        $data['semester'] = $smt;
+        $data['tahun'] = date('Y');
+        $data['dsn'] = $this->m_datadsn->get_dsn($smt,date('Y'));
+      }
+    $this->load->view('dosen',$data);
+  }
 
   public function tambahdosen()
   {
@@ -101,15 +116,14 @@ class dosen extends CI_Controller {
       if($numrow > 1){
         // Kita push (add) array data ke variabel data
         array_push($data, [
-          'nip' => $row['A'], // Ambil data nama
-          'nama' => $row['B'], // Ambil data gender
-          'posisi' => $row['C'], // Ambil data jenis kelamin
-          'employeestatus' => $row['D'], // Ambil data alamat
-          'sk_pertama' => $row['E'], // Ambil data alamat
-          'sk_posisi' => $row['F'], // Ambil data alamat
-          'tmt' => $row['G'], // Ambil data alamat
-          'pendidikan' => $row['H'], // Ambil data alamat
-          'kewarganegaraan' => $row['I'], // Ambil data alamat
+          'schoolyear' => $row['A'],
+          'semester' => $row['B'],
+          'nip' => $row['C'],
+          'name' => $row['D'],
+          'position' => $row['E'],
+          'employee_status' => $row['F'],
+          'education' => $row['G'],
+          'country_of_origin' => $row['H'],
         ]);
       }
       

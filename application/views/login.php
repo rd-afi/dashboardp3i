@@ -39,29 +39,20 @@
                     <div class="col-lg-4">
                         <div class="login-content card">
                             <div class="login-form">
-                                <h4>Login</h4>
+                                <!-- <h4>Login</h4> -->
+                                <h4>
+                                    <img src="<?php echo base_url('assets/images/logo_p3i-1.png') ?>" alt="Logo" height="100">
+                                </h4>
                                 <form action="<?php echo site_url('login/aksi_login') ?>" method="post">
                                     <div class="form-group">
                                         <label>Username</label>
-                                        <input type="text" class="form-control" name="username" placeholder="Username">
+                                        <input type="text" class="form-control" name="username" placeholder="Username" autofocus>
                                     </div>
                                     <div class="form-group">
                                         <label>Password</label>
                                         <input type="password" class="form-control" name="password" placeholder="Password">
                                     </div>
-                                    <!-- <div class="checkbox">
-                                        <label>
-        										<input type="checkbox"> Remember Me
-        									</label>
-                                        <label class="pull-right">
-        										<a href="#">Forgotten Password?</a>
-        									</label>
-
-                                    </div> -->
                                     <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Sign in</button>
-                                    <!-- <div class="register-link m-t-15 text-center">
-                                        <p>Don't have account ? <a href="#"> Sign Up Here</a></p>
-                                    </div> -->
                                 </form>
                             </div>
                         </div>

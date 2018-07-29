@@ -37,12 +37,52 @@ $this->load->view('bar/head');
                         
                         ?> 
                             <div class="card">
+                                <div class="card-body">
+                                    <form action="<?php echo site_url('dosen_tamu')?>" class="form-inline" method="POST">
+                                    <table class="table-responsive display nowrap" style="width:100%">
+                                    <div class="form-group">
+                                        <tr>
+                                            <td class="p-10">
+                                            <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                                <option selected="" disabled=""> - Semester - </option>
+                                                <option value="12">Ganjil - Genap</option>
+                                                <option value="21">Genap - Ganjil</option>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                            <option selected="" disabled="">Pilih Tahun</option>
+                                            <?php
+                                                for($i=2016;$i<=date('Y');$i++){
+                                                if($i == date('Y')){
+                                                    echo '<option selected="" value="'.$i.'">'.$i.'</option>';
+                                                }else{
+                                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                }   
+                                                }
+                                            ?>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <center><h4> Periode Semester <?php
+                                if ($semester == "12") {
+                                    $smt = "Ganjil - Genap";
+                                } else {
+                                    $smt = "Genap - Ganjil";
+                                }
+                                echo $smt." ".$tahun; ?></h4></center>
                                 <div class="card-body p-b-0">
-                                    <!-- <h4 class="card-title">Customtab2 Tab</h4> -->
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs customtab2" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Tabel</span></a> </li>
-                                    </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab" role="tabpanel">
@@ -51,35 +91,37 @@ $this->load->view('bar/head');
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Nama</th>
-                                                <th>Jenis Kelamin</th>
-                                                <th>Negara Asal</th>
-                                                <th>Nama Perusahaan</th>
-                                                <th>Nama Kegiatan</th>
-                                                <th>Jabatan</th>
-                                                <th>Pendidikan Terakhir</th>
-                                                <th>Tanggal Pelaksanaan</th>
-                                                <th>Uraian Kegiatan</th>
-                                                <th>Tempat</th>
+                                                <th>School Year</th>
+                                                <th>Semester</th>
+                                                <th>Name</th>
+                                                <th>Gender</th>
+                                                <th>Country of Origin</th>
+                                                <th>Institution</th>
+                                                <th>Event</th>
+                                                <th>Position</th>
+                                                <th>Education</th>
+                                                <th>Time Period</th>
+                                                <th>Event</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                             $no = 1;
-                                            foreach($dosen_tamu as $d){ 
+                                            foreach($dsn_tamu as $d){ 
                                             ?>
                                             <tr>
-                                                <td><?php echo $d->no ?></td>
-                                                <td><?php echo $d->nama ?></td>
+                                                <td><?php echo $no++ ?></td>
+                                                <td><?php echo $d->schoolyear ?></td>
+                                                <td><?php echo $d->semester ?></td>
+                                                <td><?php echo $d->name ?></td>
                                                 <td><?php echo $d->gender ?></td>
-                                                <td><?php echo $d->negara_asal ?></td>
-                                                <td><?php echo $d->nama_perusahaan ?></td>
-                                                <td><?php echo $d->nama_kegiatan ?></td>
-                                                <td><?php echo $d->jabatan ?></td>
-                                                <td><?php echo $d->pendidikan_terakhir ?></td>
-                                                <td><?php echo $d->tgl_pelaksanaan ?></td>
-                                                <td><?php echo $d->uraian_kegiatan ?></td>
-                                                <td><?php echo $d->tempat ?></td>
+                                                <td><?php echo $d->country_of_origin ?></td>
+                                                <td><?php echo $d->institution ?></td>
+                                                <td><?php echo $d->event ?></td>
+                                                <td><?php echo $d->position ?></td>
+                                                <td><?php echo $d->education ?></td>
+                                                <td><?php echo $d->time_period ?></td>
+                                                <td><?php echo $d->venue ?></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
@@ -98,7 +140,7 @@ $this->load->view('bar/head');
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2018 All rights reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

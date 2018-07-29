@@ -37,12 +37,52 @@ $this->load->view('bar/head');
                         
                         ?> 
                             <div class="card">
+                                <div class="card-body">
+                                    <form action="<?php echo site_url('dosen/index')?>" class="form-inline" method="POST">
+                                    <table class="table-responsive display nowrap" style="width:100%">
+                                    <div class="form-group">
+                                        <tr>
+                                            <td class="p-10">
+                                            <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                                <option selected="" disabled=""> - Semester - </option>
+                                                <option value="12">Ganjil - Genap</option>
+                                                <option value="21">Genap - Ganjil</option>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                            <option selected="" disabled="">Pilih Tahun</option>
+                                            <?php
+                                                for($i=2016;$i<=date('Y');$i++){
+                                                if($i == date('Y')){
+                                                    echo '<option selected="" value="'.$i.'">'.$i.'</option>';
+                                                }else{
+                                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                }   
+                                                }
+                                            ?>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <center><h4> Periode Semester <?php
+                                if ($semester == "12") {
+                                    $smt = "Ganjil - Genap";
+                                } else {
+                                    $smt = "Genap - Ganjil";
+                                }
+                                echo $smt." ".$tahun; ?></h4></center>
                                 <div class="card-body p-b-0">
-                                    <!-- <h4 class="card-title">Customtab2 Tab</h4> -->
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs customtab2" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Tabel</span></a> </li>
-                                    </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab" role="tabpanel">
@@ -52,33 +92,31 @@ $this->load->view('bar/head');
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>School Year</th>
+                                                <th>Semester</th>
                                                 <th>NIP</th>
-                                                <th>Nama</th>
-                                                <th>Posisi</th>
-                                                <th>Status Pegawai</th>
-                                                <th>SK Pertama</th>
-                                                <th>SK Posisi</th>
-                                                <th>TMT</th>
-                                                <th>Pendidikan</th>
-                                                <th>Kewarganegaraan</th>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Employee Status</th>
+                                                <th>Education</th>
+                                                <th>Country of Origin</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                             $no = 1;
-                                            foreach($dosen as $d){ 
+                                            foreach($dsn as $d){ 
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
+                                                <td><?php echo $d->schoolyear ?></td>
+                                                <td><?php echo $d->semester ?></td>
                                                 <td><?php echo $d->nip ?></td>
-                                                <td><?php echo $d->nama ?></td>
-                                                <td><?php echo $d->posisi ?></td>
-                                                <td><?php echo $d->employeestatus ?></td>
-                                                <td><?php echo $d->sk_pertama ?></td>
-                                                <td><?php echo $d->sk_posisi ?></td>
-                                                <td><?php echo $d->tmt ?></td>
-                                                <td><?php echo $d->pendidikan ?></td>
-                                                <td><?php echo $d->kewarganegaraan ?></td>
+                                                <td><?php echo $d->name ?></td>
+                                                <td><?php echo $d->position ?></td>
+                                                <td><?php echo $d->employee_status ?></td>
+                                                <td><?php echo $d->education ?></td>
+                                                <td><?php echo $d->country_of_origin ?></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
@@ -99,7 +137,7 @@ $this->load->view('bar/head');
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2018 All rights reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

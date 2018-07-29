@@ -25,9 +25,10 @@ $this->load->view('bar/head');
             <div class="card-content">
                 <div class="alert alert-secondary">
                     <h4 class="alert-heading"><b>PERHATIAN!</b></h4>
-                    Sebelum melakukan upload file excel silahkan untuk mendownload dan menyesuaikan template berikut ini.
+                    Sebelum melakukan upload file excel silahkan untuk mendownload petunjuk dan template berikut ini.
                     <p></p>
                     <hr>
+                    <a href="<?php echo base_url().'template_mhs_io' ?>" class="btn btn-warning m-b-10 m-l-5 btn-sm">Download Petunjuk</a>
                     <a href="<?php echo base_url().'template_mhs_io' ?>" class="btn btn-warning m-b-10 m-l-5 btn-sm">Download Template</a>
                 </div>
             </div>
@@ -89,23 +90,23 @@ $this->load->view('bar/head');
                                                 <table id='myTable' class='table table-responsive table-striped table-bordered table-hover display nowrap' style='width:100%'>
                                                     <thead>
                                                         <tr>
+                                                            <th>School Year</th>
+                                                            <th>Semester</th>
                                                             <th>NIM</th>
-                                                            <th>NAMA</th>
-                                                            <th>Angkatan</th>
-                                                            <th>Fakultas</th>
-                                                            <th>Program Studi</th>
-                                                            <th>S1 / S2 / S3</th>
-                                                            <th>Jenis Kelamin</th>
+                                                            <th>Name</th>
+                                                            <th>Generatin</th>
+                                                            <th>Faculty</th>
+                                                            <th>Study Program</th>
+                                                            <th>Degree</th>
+                                                            <th>Gender</th>
                                                             <th>Status</th>
-                                                            <th>BPP</th>
-                                                            <th>Asal Negara</th>
-                                                            <th>Univ Origin</th>
-                                                            <th>Univ Destination</th>
+                                                            <th>Fee</th>
+                                                            <th>Country of Origin</th>
+                                                            <th>Univ. Origin</th>
+                                                            <th>Univ. Destination</th>
                                                             <th>Exchange Period</th>
-                                                            <th>LOA</th>
-                                                            <th>MOA</th>
                                                             <th>Passport ID</th>
-                                                            <th>Keterangan</th>
+                                                            <th>Information</th>
                                                         </tr>
                                                     </thead>";
                                                 
@@ -116,75 +117,74 @@ $this->load->view('bar/head');
                                                 // $sheet adalah variabel yang dikirim dari controller
                                                 foreach($sheet as $row){ 
                                                     // Ambil data pada excel sesuai Kolom
-                                                    $nim = $row['A']; // Ambil data nama
-                                                    $nama = $row['B']; // Ambil data gender
-                                                    $angkatan = $row['C']; // Ambil data jenis kelamin
-                                                    $fakultas = $row['D']; // Ambil data alamat
-                                                    $prodi = $row['E']; // Ambil data alamat
-                                                    $jenjang = $row['F']; // Ambil data alamat
-                                                    $jeniskelamin = $row['G']; // Ambil data alamat
-                                                    $status = $row['H']; // Ambil data alamat
-                                                    $bpp = $row['I']; // Ambil data alamat
-                                                    $negara_asal = $row['J']; // Ambil data alamat
-                                                    $univ_origin = $row['K']; // Ambil data alamat
-                                                    $univ_dest = $row['L']; // Ambil data alamat
-                                                    $exchange_period = $row['M']; // Ambil data alamat
-                                                    $loa = $row['N']; // Ambil data alamat
-                                                    $moa = $row['O']; // Ambil data alamat
-                                                    $passport = $row['P']; // Ambil data alamat
-                                                    $ket = $row['Q']; // Ambil data alamat
+                                                    $schoolyear = $row['A'];
+                                                    $semester = $row['B'];
+                                                    $nim = $row['C'];
+                                                    $name = $row['D'];
+                                                    $generation = $row['E'];
+                                                    $faculty = $row['F'];
+                                                    $study_program = $row['G'];
+                                                    $degree = $row['H'];
+                                                    $gender = $row['I'];
+                                                    $status = $row['J'];
+                                                    $fee = $row['K'];
+                                                    $country_of_origin = $row['L'];
+                                                    $univ_origin = $row['M'];
+                                                    $univ_dest = $row['N'];
+                                                    $exchange_period = $row['O'];
+                                                    $passport = $row['P'];
+                                                    $inf = $row['Q'];
                                                     
                                                     // Cek jika semua data tidak diisi
-                                                    if(empty($nim) && empty($nama) && empty($angkatan) && empty($fakultas) && empty($prodi) && empty($jenjang) && empty($jeniskelamin) && empty($status) && empty($bpp) && empty($negara_asal) && empty($univ_origin) && empty($univ_dest) && empty($exchange_period) && empty($loa) && empty($moa) && empty($passport) && empty($ket))
+                                                    if(empty($schoolyear) && empty($semester) && empty($nim) && empty($name) && empty($generation) && empty($faculty) && empty($study_program) && empty($degree) && empty($gender) && empty($status) && empty($fee) && empty($country_of_origin) && empty($univ_origin) && empty($univ_dest) && empty($exchange_period) && empty($passport) && empty($inf))
                                                         continue; // Lewat data pada baris ini (masuk ke looping selanjutnya / baris selanjutnya)
                                                     
                                                     // Cek $numrow apakah lebih dari 1
                                                     // Artinya karena baris pertama adalah nama-nama kolom
-                                                    // Jadi dilewat saja, tidak usah diimport
                                                     if($numrow > 1){
                                                         // Validasi apakah semua data telah diisi
                                                         // Jika data kosong akan diberi warna merah
+                                                        $schoolyear_td = ( ! empty($schoolyear))? "" : " style='background: #E07171;'";
+                                                        $semester_td = ( ! empty($semester))? "" : " style='background: #E07171;'";
                                                         $nim_td = ( ! empty($nim))? "" : " style='background: #E07171;'";
-                                                        $nama_td = ( ! empty($nama))? "" : " style='background: #E07171;'";
-                                                        $angkatan_td = ( ! empty($angkatan))? "" : " style='background: #E07171;'";
-                                                        $fakultas_td = ( ! empty($fakultas))? "" : " style='background: #E07171;'";
-                                                        $prodi_td = ( ! empty($prodi))? "" : " style='background: #E07171;'";
-                                                        $jenjang_td = ( ! empty($jenjang))? "" : " style='background: #E07171;'";
-                                                        $jeniskelamin_td = ( ! empty($jeniskelamin))? "" : " style='background: #E07171;'";
+                                                        $name_td = ( ! empty($name))? "" : " style='background: #E07171;'";
+                                                        $generation_td = ( ! empty($generation))? "" : " style='background: #E07171;'";
+                                                        $faculty_td = ( ! empty($faculty))? "" : " style='background: #E07171;'";
+                                                        $study_program_td = ( ! empty($study_program))? "" : " style='background: #E07171;'";
+                                                        $degree_td = ( ! empty($degree))? "" : " style='background: #E07171;'";
+                                                        $gender_td = ( ! empty($gender))? "" : " style='background: #E07171;'";
                                                         $status_td = ( ! empty($status))? "" : " style='background: #E07171;'";
-                                                        $bpp_td = ( ! empty($bpp))? "" : " style='background: #E07171;'";
-                                                        $negara_asal_td = ( ! empty($negara_asal))? "" : " style='background: #E07171;'";
+                                                        $fee_td = ( ! empty($fee))? "" : " style='background: #E07171;'";
+                                                        $country_of_origin_td = ( ! empty($country_of_origin))? "" : " style='background: #E07171;'";
                                                         $univ_origin_td = ( ! empty($univ_origin))? "" : " style='background: #E07171;'";
                                                         $univ_dest_td = ( ! empty($univ_dest))? "" : " style='background: #E07171;'";
                                                         $exchange_period_td = ( ! empty($exchange_period))? "" : " style='background: #E07171;'";
-                                                        $loa_td = ( ! empty($loa))? "" : " style='background: #E07171;'";
-                                                        $moa_td = ( ! empty($moa))? "" : " style='background: #E07171;'";
                                                         $passport_td = ( ! empty($passport))? "" : " style='background: #E07171;'";
-                                                        $ket_td = ( ! empty($ket))? "" : " style='background: #E07171;'";
+                                                        $inf_td = ( ! empty($inf))? "" : " style='background: #E07171;'";
                                                         
                                                         // Jika salah satu data ada yang kosong
-                                                        if(empty($nim) or empty($nama) or empty($angkatan) or empty($fakultas) or empty($prodi) or empty($jenjang) or empty($jeniskelamin) or empty($status) or empty($bpp) or empty($negara_asal) or empty($univ_origin) or empty($univ_dest) or empty($exchange_period) or empty($loa) or empty($moa) or empty($passport) or empty($ket)){
+                                                        if(empty($schoolyear) or empty($semester) or empty($nim) or empty($name) or empty($generation) or empty($faculty) or empty($study_program) or empty($degree) or empty($gender) or empty($status) or empty($fee) or empty($country_of_origin) or empty($univ_origin) or empty($univ_dest) or empty($exchange_period) or empty($passport) or empty($inf)){
                                                             $kosong++; // Tambah 1 variabel $kosong
                                                         }
                                                         
                                                         echo "<tr>";
+                                                        echo "<td".$schoolyear_td.">".$schoolyear."</td>";
+                                                        echo "<td".$semester_td.">".$semester."</td>";
                                                         echo "<td".$nim_td.">".$nim."</td>";
-                                                        echo "<td".$nama_td.">".$nama."</td>";
-                                                        echo "<td".$angkatan_td.">".$angkatan."</td>";
-                                                        echo "<td".$fakultas_td.">".$fakultas."</td>";
-                                                        echo "<td".$prodi_td.">".$prodi."</td>";
-                                                        echo "<td".$jenjang_td.">".$jenjang."</td>";
-                                                        echo "<td".$jeniskelamin_td.">".$jeniskelamin."</td>";
+                                                        echo "<td".$name_td.">".$name."</td>";
+                                                        echo "<td".$generation_td.">".$generation."</td>";
+                                                        echo "<td".$faculty_td.">".$faculty."</td>";
+                                                        echo "<td".$study_program_td.">".$study_program."</td>";
+                                                        echo "<td".$degree_td.">".$degree."</td>";
+                                                        echo "<td".$gender_td.">".$gender."</td>";
                                                         echo "<td".$status_td.">".$status."</td>";
-                                                        echo "<td".$bpp_td.">".$bpp."</td>";
-                                                        echo "<td".$negara_asal_td.">".$negara_asal."</td>";
+                                                        echo "<td".$fee_td.">".$fee."</td>";
+                                                        echo "<td".$country_of_origin_td.">".$country_of_origin."</td>";
                                                         echo "<td".$univ_origin_td.">".$univ_origin."</td>";
                                                         echo "<td".$univ_dest_td.">".$univ_dest."</td>";
                                                         echo "<td".$exchange_period_td.">".$exchange_period."</td>";
-                                                        echo "<td".$loa_td.">".$loa."</td>";
-                                                        echo "<td".$moa_td.">".$moa."</td>";
                                                         echo "<td".$passport_td.">".$passport."</td>";
-                                                        echo "<td".$ket_td.">".$ket."</td>";
+                                                        echo "<td".$inf_td.">".$inf."</td>";
                                                         echo "</tr>";
                                                     }
                                                     
@@ -211,8 +211,8 @@ $this->load->view('bar/head');
                                                     echo "<hr>";
                                                     
                                                     // Buat sebuah tombol untuk mengimport data ke database
-                                                    echo "<button class='btn btn-success btn-rounded' type='submit' name='import'>Import</button>";
-                                                    echo "<a href='".base_url("mahasiswa_io")."'>Cancel</a>";
+                                                    echo "<button href='".base_url("mahasiswa_io")."' class='btn btn-danger btn-default' type='submit' name='cancel'>Cancel</button>";
+                                                    echo "<button class='btn btn-primary btn-default pull-right' style='margin-left:10px;' type='submit' name='import'>Import</button>";
                                                 // }
                                                 
                                                 echo "</form>";

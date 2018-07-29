@@ -37,12 +37,52 @@ $this->load->view('bar/head');
                         
                         ?> 
                             <div class="card">
+                                <div class="card-body">
+                                    <form action="<?php echo site_url('mahasiswa_io')?>" class="form-inline" method="POST">
+                                    <table class="table-responsive display nowrap" style="width:100%">
+                                    <div class="form-group">
+                                        <tr>
+                                            <td class="p-10">
+                                            <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                                <option selected="" disabled=""> - Semester - </option>
+                                                <option value="12">Ganjil - Genap</option>
+                                                <option value="21">Genap - Ganjil</option>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                            <option selected="" disabled="">Pilih Tahun</option>
+                                            <?php
+                                                for($i=2016;$i<=date('Y');$i++){
+                                                if($i == date('Y')){
+                                                    echo '<option selected="" value="'.$i.'">'.$i.'</option>';
+                                                }else{
+                                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                }   
+                                                }
+                                            ?>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <center><h4> Periode Semester <?php
+                                if ($semester == "12") {
+                                    $smt = "Ganjil - Genap";
+                                } else {
+                                    $smt = "Genap - Ganjil";
+                                }
+                                echo $smt." ".$tahun; ?></h4></center>
                                 <div class="card-body p-b-0">
-                                    <!-- <h4 class="card-title">Customtab2 Tab</h4> -->
-                                    <!-- Nav tabs -->
-                                    <ul class="nav nav-tabs customtab2" role="tablist">
-                                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#tab" role="tab"><span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Tabel</span></a> </li>
-                                    </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab" role="tabpanel">
@@ -51,47 +91,49 @@ $this->load->view('bar/head');
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>School Year</th>
+                                                <th>Semester</th>
                                                 <th>NIM</th>
-                                                <th>Nama</th>
-                                                <th>Angkatan</th>
-                                                <th>Fakultas</th>
-                                                <th>Prodi</th>
-                                                <th>Jenjang</th>
-                                                <th>Jenis Kelamin</th>
+                                                <th>Name</th>
+                                                <th>Generation</th>
+                                                <th>Faculty</th>
+                                                <th>Study Program</th>
+                                                <th>Degree</th>
+                                                <th>Gender</th>
                                                 <th>Status</th>
-                                                <th>BPP</th>
-                                                <th>Negara Asal</th>
-                                                <th>Universitas Destination</th>
+                                                <th>Fee</th>
+                                                <th>Country of Origin</th>
+                                                <th>Country of Destination</th>
+                                                <th>University Destination</th>
                                                 <th>Exchange Period</th>
-                                                <th>LOA</th>
-                                                <th>MOA</th>
                                                 <th>Passport ID</th>
-                                                <th>Keterangan</th>
+                                                <th>Information</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                             $no = 1;
-                                            foreach($mahasiswa_io as $d){ 
+                                            foreach($mhs_io as $d){ 
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
+                                                <td><?php echo $d->schoolyear ?></td>
+                                                <td><?php echo $d->semester ?></td>
                                                 <td><?php echo $d->nim ?></td>
-                                                <td><?php echo $d->nama ?></td>
-                                                <td><?php echo $d->angkatan ?></td>
-                                                <td><?php echo $d->fakultas ?></td>
-                                                <td><?php echo $d->prodi ?></td>
-                                                <td><?php echo $d->jenjang ?></td>
-                                                <td><?php echo $d->jeniskelamin ?></td>
+                                                <td><?php echo $d->name ?></td>
+                                                <td><?php echo $d->generation ?></td>
+                                                <td><?php echo $d->faculty ?></td>
+                                                <td><?php echo $d->study_program ?></td>
+                                                <td><?php echo $d->degree ?></td>
+                                                <td><?php echo $d->gender ?></td>
                                                 <td><?php echo $d->status ?></td>
-                                                <td><?php echo $d->bpp ?></td>
-                                                <td><?php echo $d->negara_asal ?></td>
+                                                <td><?php echo $d->fee ?></td>
+                                                <td><?php echo $d->country_of_origin ?></td>
+                                                <td><?php echo $d->univ_origin ?></td>
                                                 <td><?php echo $d->univ_dest ?></td>
                                                 <td><?php echo $d->exchange_period ?></td>
-                                                <td><?php echo $d->loa ?></td>
-                                                <td><?php echo $d->moa ?></td>
                                                 <td><?php echo $d->passport ?></td>
-                                                <td><?php echo $d->ket ?></td>
+                                                <td><?php echo $d->inf ?></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
@@ -110,7 +152,7 @@ $this->load->view('bar/head');
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2018 All rights reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

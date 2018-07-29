@@ -3,6 +3,14 @@
 
 <?php
 $this->load->view('bar/head');
+function rupiah($angka){
+    $hasil_rupiah = "Rp. " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+}
+function usd($angka){
+    $hasil_rupiah = "$ " . number_format($angka,2,',','.');
+    return $hasil_rupiah;
+}
 ?>
         <!-- Page wrapper  -->
         <div class="page-wrapper">
@@ -24,11 +32,56 @@ $this->load->view('bar/head');
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
+                                <div class="card-body">
+                                    <form action="<?php echo site_url('isiqsaurp3i')?>" class="form-inline" method="POST">
+                                    <table class="table-responsive display nowrap" style="width:100%">
+                                    <div class="form-group">
+                                        <tr>
+                                            <td class="p-10">
+                                            <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                                <option selected="" disabled=""> - Semester - </option>
+                                                <option value="12">Ganjil - Genap</option>
+                                                <option value="21">Genap - Ganjil</option>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                            <option selected="" disabled="">Pilih Tahun</option>
+                                            <?php
+                                                for($i=2016;$i<=date('Y');$i++){
+                                                if($i == date('Y')){
+                                                    echo '<option selected="" value="'.$i.'">'.$i.'</option>';
+                                                }else{
+                                                    echo '<option value="'.$i.'">'.$i.'</option>';
+                                                }   
+                                                }
+                                            ?>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
+                                            </td>
+                                        </tr>
+                                    </div>
+                                    </table>
+                                    </form>
+                                </div>
+                            </div>
+                        <div class="card">
                             <!-- <div class="card-title">
                                 <h4></h4>
 
                             </div> -->
                             <div class="card-body">
+                                <center><h4> Periode Semester <?php
+                                if ($semester == "12") {
+                                    $smt = "Ganjil - Genap";
+                                } else {
+                                    $smt = "Genap - Ganjil";
+                                }
+                                echo $smt." ".$tahun; ?></h4></center>
                                 <div class="basic-form">
                                     <form>
                                         <div class="form-group table-responsive">
@@ -77,17 +130,25 @@ $this->load->view('bar/head');
                                                 </tr>
                                                 <tr>
                                                     <td>Staff with PhD</td>
-                                                    <td> <?php echo $staff_phd_full ?> </td>
+                                                    <!-- <td> <?php echo $staff_phd_full ?> </td> -->
+                                                    <td><a href="<?php echo site_url('isiqsaurp3i/efidence_phd_staff_dosen_full') ?>"> 
+                                                        <?php echo $staff_phd_full ?></a></td>
                                                     <td> <?php echo $staff_phd_part = $staff_phd_dosen_part + $staff_phd_tamu_part ?> </td>
+                                                    <!-- <td> <?php echo $staff_phd_part = $staff_phd_dosen_part + $staff_phd_tamu_part ?> </td> -->
                                                     <td> <?php echo $staff_phd_full + $staff_phd_part ?> </td>
                                                     <td> <?php echo round($staff_phd_full + ($staff_phd_part / 3)) ?> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Faculty Staff</td>
-                                                    <td> <?php echo $staff_dosen_full ?> </td>
-                                                    <td> <?php echo $staff_parttime = ($staff_dosen_part + $staff_tamu_part) ?> </td>
-                                                    <td> <?php echo $staff_dosen_full + $staff_parttime ?> </td>
-                                                    <td> <?php echo round($staff_dosen_full + ($staff_parttime / 3)) ?> </td>
+                                                    <td><a href="<?php echo site_url('isiqsaurp3i/efidence_faculty_staff_dosen_full') ?>"> 
+                                                        <?php echo $staff_dosen_full ?></a></td>
+                                                    <td><a href="<?php echo site_url('isiqsaurp3i/efidence_faculty_staff_dosen_parttime') ?>"> 
+                                                        <?php echo $staff_tamu_part ?></a></td><!-- 
+                                                    <td><a href="<?php echo site_url('isiqsaurp3i/efidence_faculty_staff_dosen_parttime') ?>"> 
+                                                        <?php echo $staff_parttime = ($staff_dosen_part + $staff_tamu_part) ?></a></td> -->
+                                                    <!-- <td> <?php echo $staff_dosen_full + $staff_parttime ?> </td> -->
+                                                    <td> <?php echo $staff_dosen_full + $staff_tamu_part ?> </td>
+                                                    <td> <?php echo round($staff_dosen_full + ($staff_tamu_part / 3)) ?> </td>
                                                 </tr>
 
                                                 <!-- STUDENT - UNDERGRADUATE -->
@@ -230,9 +291,18 @@ $this->load->view('bar/head');
                                                 </tr>
                                                 <tr>
                                                     <td>Undergraduate Fees - International</td>
-                                                    <td colspan="4" align="center">N/A</td>
+                                                    <td colspan="2" align="center"><?php
+                                                    if (round(($fees_undergraduate_students_international->fee)+0)<0) {
+                                                        echo 0;
+                                                    } else {
+                                                        echo rupiah(round((($fees_undergraduate_students_international->fee)+0)/$undergraduate_international_students));
+                                                    }
+                                                    ?></td>
+                                                    <!-- <td colspan="4" align="center">N/A</td> -->
                                                     <td style="display: none"></td>
                                                     <td style="display: none"></td>
+                                                    <td colspan="2" align="center"><?php
+                                                    echo usd(round(((($fees_undergraduate_students_international->fee)+0)/$undergraduate_international_students)/14000)); ?></td>
                                                     <td style="display: none"></td>
                                                     <td style="display: none"></td>
                                                     <!-- <td>0</td>
@@ -242,38 +312,103 @@ $this->load->view('bar/head');
                                                 </tr>
                                                 <tr>
                                                     <td>Undergraduate Fees - Domestic</td>
+                                                    <td colspan="2" align="center"><?php
+                                                    if (round(($fees_undergraduate_student_domestic->fee)+0)<0) {
+                                                        echo 0;
+                                                    } else {
+                                                        echo rupiah(round((($fees_undergraduate_student_domestic->fee)+0)/$res_undergraduate_domestic));
+                                                    }
+                                                    ?></td>
+                                                    <!-- <td colspan="4" align="center">N/A</td> -->
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <td colspan="2" align="center"><?php
+                                                    echo usd(round(((($fees_undergraduate_student_domestic->fee)+0)/$res_undergraduate_domestic)/14000)); ?></td>
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <!-- <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
+                                                    <td>0</td> -->
                                                 </tr>
                                                 <tr>
                                                     <td>Graduate / Postgraduate Fees - Domestic</td>
+                                                    <td colspan="2" align="center"><?php
+                                                    echo rupiah(round((($fees_grapost_student_domestic->fee)+0)/$res_grapost_domestic)) ?></td>
+                                                    <!-- <td colspan="4" align="center">N/A</td> -->
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <td colspan="2" align="center"><?php
+                                                    echo usd(round(((($fees_grapost_student_domestic->fee)+0)/$res_grapost_domestic)/14000)); ?></td>
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <!-- <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
+                                                    <td>0</td> -->
                                                 </tr>
                                                 <tr>
                                                     <td>Graduate / Postgraduate Fees - International</td>
+                                                    <td colspan="2" align="center"><?php
+                                                    if (round(($fees_grapost_student_international->fee)+0)<0) {
+                                                        echo 0;
+                                                    } else {
+                                                        echo rupiah(round((($fees_grapost_student_international->fee)+0)/$grapost_international_students));
+                                                    }
+                                                    ?></td>
+                                                    <!-- <td colspan="4" align="center">N/A</td> -->
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <td colspan="2" align="center"><?php
+                                                    echo usd(round(((($fees_grapost_student_international->fee)+0)/$grapost_international_students)/14000)); ?></td>
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <!-- <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
+                                                    <td>0</td> -->
                                                 </tr>
                                                 <tr>
                                                     <td>Overall Student Fees - Domestic</td>
+                                                    <td colspan="2" align="center"><?php
+                                                    if (round(($fees_student_domestic->fee)+0)<0) {
+                                                        echo 0;
+                                                    } else {
+                                                        echo rupiah(round((($fees_student_domestic->fee)+0)/$res_student_domestic));
+                                                    }
+                                                    ?></td>
+                                                    <!-- <td colspan="4" align="center">N/A</td> -->
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <td colspan="2" align="center"><?php
+                                                    echo usd(round(((($fees_student_domestic->fee)+0)/$res_student_domestic)/14000)); ?></td>
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <!-- <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
+                                                    <td>0</td> -->
                                                 </tr>
                                                 <tr>
                                                     <td>Overall Student Fees - International</td>
+                                                    <td colspan="2" align="center"><?php
+                                                    if (round(($fees_students_international->fee)+0)<0) {
+                                                        echo 0;
+                                                    } else {
+                                                        echo rupiah(round((($fees_students_international->fee)+0)/$res_student_international));
+                                                    }
+                                                    ?></td>
+                                                    <!-- <td colspan="4" align="center">N/A</td> -->
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <td colspan="2" align="center"><?php
+                                                    echo usd(round(((($fees_students_international->fee)+0)/$res_student_international)/14000)); ?></td>
+                                                    <td style="display: none"></td>
+                                                    <td style="display: none"></td>
+                                                    <!-- <td>0</td>
                                                     <td>0</td>
                                                     <td>0</td>
-                                                    <td>0</td>
-                                                    <td>0</td>
+                                                    <td>0</td> -->
                                                 </tr>
 
 

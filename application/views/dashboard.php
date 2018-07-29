@@ -69,7 +69,7 @@ $this->load->view('bar/head');
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <div class="card">
                             <div class="card-title">
                                 <h4>International Faculty Staff</h4>
@@ -88,9 +88,9 @@ $this->load->view('bar/head');
                                 <canvas id="chartStudent" width="600" height="400"></canvas>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- /# column -->
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <div class="card">
                             <div class="card-title">
                                 <h4>STUDENT - GENDER</h4>
@@ -109,7 +109,7 @@ $this->load->view('bar/head');
                                 <canvas id="chartInOut" width="600" height="400"></canvas>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 
@@ -126,7 +126,7 @@ $this->load->view('bar/head');
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2018 All rights reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->

@@ -10,11 +10,12 @@ $this->load->view('bar/head');
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Data Dosen Tamu</h3> </div>
+                    <h3 class="text-primary">Evidence Faculty Staff - Full Time</h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Data Dosen Tamu</li>
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('isiqsaurp3i') ?>">Indikator QS AUR</a></li>
+                        <li class="breadcrumb-item active">Evidence Faculty Staff - Full Time</li>
                     </ol>
                 </div>
             </div>
@@ -47,37 +48,46 @@ $this->load->view('bar/head');
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="tab" role="tabpanel">
                                             <div class="p-20">
-                                                <table id="myTable" class="table table-responsive table-striped table-bordered table-hover display nowrap" style="width:100%">
+                                <!-- <div class="table-responsive m-t-40"> -->
+                                    <table id="myTable" class="table table-responsive table-striped table-bordered table-hover display nowrap" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
-                                                <th>Name</th>
-                                                <th>Join University</th>
-                                                <th>Degree</th>
-                                                <th>Country</th>
-                                                <th>Full Time</th>
-                                                <th>Part Time</th>
+                                                <th>NIP</th>
+                                                <th>Nama</th>
+                                                <th>Posisi</th>
+                                                <th>Status Pegawai</th>
+                                                <th>SK Pertama</th>
+                                                <th>SK Posisi</th>
+                                                <th>TMT</th>
+                                                <th>Pendidikan</th>
+                                                <th>Kewarganegaraan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php 
                                             $no = 1;
-                                            foreach($dosen_phd as $d){ 
+                                            foreach($data_evidence as $d){ 
                                             ?>
                                             <tr>
-                                                <td><?php echo $d->no ?></td>
-                                                <td><?php echo $d->name ?></td>
-                                                <td><?php echo $d->joinUniv ?></td>
-                                                <td><?php echo $d->degree ?></td>
-                                                <td><?php echo $d->country ?></td>
-                                                <td><?php echo $d->fulltime ?></td>
-                                                <td><?php echo $d->parttime ?></td>
+                                                <td><?php echo $no++ ?></td>
+                                                <td><?php echo $d->nip ?></td>
+                                                <td><?php echo $d->nama ?></td>
+                                                <td><?php echo $d->posisi ?></td>
+                                                <td><?php echo $d->employeestatus ?></td>
+                                                <td><?php echo $d->sk_pertama ?></td>
+                                                <td><?php echo $d->sk_posisi ?></td>
+                                                <td><?php echo $d->tmt ?></td>
+                                                <td><?php echo $d->pendidikan ?></td>
+                                                <td><?php echo $d->kewarganegaraan ?></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
+                                <!-- </div> -->
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +100,7 @@ $this->load->view('bar/head');
             </div>
             <!-- End Container fluid  -->
             <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved. Template designed by <a href="https://colorlib.com">Colorlib</a></footer>
+            <footer class="footer"> © 2018 All rights reserved.</footer>
             <!-- End footer -->
         </div>
         <!-- End Page wrapper  -->
@@ -103,6 +113,10 @@ $this->load->view('bar/js');
 <script>
     var table;
     $(document).ready(function() {
-        $('#myTable').DataTable();
+        $('#myTable').DataTable({
+            destroy: true,
+            dom: 'Bfrtip',
+            buttons: ['copy', 'excel', 'pdf', 'print']
+        });
     } );
 </script>

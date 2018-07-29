@@ -19,13 +19,29 @@ class mahasiswa extends CI_Controller {
 
   //---------------------------------- SISFO -----------------------------
 
-	public function index()
-	{
+	public function index(){
+    if (date('m')<=6) {
+      $smt = "12";
+    } else {
+      $smt = "21";
+    }
     ini_set('memory_limit', '-1');
     $data['mahasiswa_sisfo'] = $this->m_datamhs->view();
-    // $data['user'] = $this->m_datamhs->tampil_data()->result();
-    // $this->load->view('mahasiswa', array('error' => ' ' ));
-		$this->load->view('mahasiswa', $data);
+      if(isset($_POST['semester']) && isset($_POST['tahun'])){
+        $data['semester'] = $this->input->post('semester');
+        $data['tahun'] = $this->input->post('tahun');
+        $semester = $this->input->post('semester');
+        $tahun = $this->input->post('tahun');
+        $data['mhs'] = $this->m_datamhs->get_mhs($semester,$tahun);
+      }else{
+        // $data['bulan'] = date('F');
+        $data['semester'] = $smt;
+        $data['tahun'] = date('Y');
+        $data['mhs'] = $this->m_datamhs->get_mhs($smt,date('Y'));
+        // $data['mhs_all'] = $this->m_datamhs->view();
+        // $data['absensi'] = $this->m_data->get_absensi_non(date('F'),date('Y'));
+      }
+    $this->load->view('mahasiswa',$data);
 	}
 
   public function tambahmhs()
@@ -120,25 +136,23 @@ class mahasiswa extends CI_Controller {
       if($numrow > 1){
         // Kita push (add) array data ke variabel data
         array_push($data, [
-        	'schoolyear' => $row['A'], // Ambil data nama
+        	  'schoolyear' => $row['A'], // Ambil data nama
             'semester' => $row['B'], // Ambil data gender
             'nim' => $row['C'], // Ambil data jenis kelamin
-            'nama' => $row['D'], // Ambil data alamat
-            'angkatan' => $row['E'], // Ambil data alamat
-            'fakultas' => $row['F'], // Ambil data alamat
-            'prodi' => $row['G'], // Ambil data alamat
-            'jenjang' => $row['H'], // Ambil data alamat
+            'name' => $row['D'], // Ambil data alamat
+            'generation' => $row['E'], // Ambil data alamat
+            'faculty' => $row['F'], // Ambil data alamat
+            'study_program' => $row['G'], // Ambil data alamat
+            'degree' => $row['H'], // Ambil data alamat
             'gender' => $row['I'], // Ambil data alamat
             'status' => $row['J'], // Ambil data alamat
-            'bpp' => $row['K'], // Ambil data alamat
-            'negara_asal' => $row['L'], // Ambil data alamat
+            'fee' => $row['K'], // Ambil data alamat
+            'country_of_origin' => $row['L'], // Ambil data alamat
             'univ_origin' => $row['M'], // Ambil data alamat
             'univ_dest' => $row['N'], // Ambil data alamat
             'exchange_period' => $row['O'], // Ambil data alamat
-            'loa' => $row['P'], // Ambil data alamat
-            'moa' => $row['Q'], // Ambil data alamat
-            'ket' => $row['R'], // Ambil data alamat
-            'ket2' => $row['S'] // Ambil data alamat
+            'inf' => $row['P'], // Ambil data alamat
+            'inf2' => $row['Q'] // Ambil data alamat
         ]);
       }
       
@@ -155,13 +169,28 @@ class mahasiswa extends CI_Controller {
 
   //-------------------------------------- IO ------------------------------
 
-  public function index_io()
-  {
+  public function index_io(){
+    if (date('m')<=6) {
+      $smt = "12";
+    } else {
+      $smt = "21";
+    }
     ini_set('memory_limit', '-1');
-    $data['mahasiswa_io'] = $this->m_datamhs->view_io();
-    // $data['user'] = $this->m_datamhs->tampil_data()->result();
-    // $this->load->view('mahasiswa', array('error' => ' ' ));
-    $this->load->view('mahasiswa_io', $data);
+      if(isset($_POST['semester']) && isset($_POST['tahun'])){
+        $data['semester'] = $this->input->post('semester');
+        $data['tahun'] = $this->input->post('tahun');
+        $semester = $this->input->post('semester');
+        $tahun = $this->input->post('tahun');
+        $data['mhs_io'] = $this->m_datamhs->get_mhs_io($semester,$tahun);
+      }else{
+        // $data['bulan'] = date('F');
+        $data['semester'] = $smt;
+        $data['tahun'] = date('Y');
+        $data['mhs_io'] = $this->m_datamhs->get_mhs_io($smt,date('Y'));
+        // $data['mhs_all'] = $this->m_datamhs->view();
+        // $data['absensi'] = $this->m_data->get_absensi_non(date('F'),date('Y'));
+      }
+    $this->load->view('mahasiswa_io',$data);
   }
 
   public function tambahmhs_io()
@@ -253,23 +282,23 @@ class mahasiswa extends CI_Controller {
       if($numrow > 1){
         // Kita push (add) array data ke variabel data
         array_push($data, [
-            'nim' => $row['A'], // Ambil data jenis kelamin
-            'nama' => $row['B'], // Ambil data alamat
-            'angkatan' => $row['C'], // Ambil data alamat
-            'fakultas' => $row['D'], // Ambil data alamat
-            'prodi' => $row['E'], // Ambil data alamat
-            'jenjang' => $row['F'], // Ambil data alamat
-            'jeniskelamin' => $row['G'], // Ambil data alamat
-            'status' => $row['H'], // Ambil data alamat
-            'bpp' => $row['I'], // Ambil data alamat
-            'negara_asal' => $row['J'], // Ambil data alamat
-            'univ_origin' => $row['K'], // Ambil data alamat
-            'univ_dest' => $row['L'], // Ambil data alamat
-            'exchange_period' => $row['M'], // Ambil data alamat
-            'loa' => $row['N'], // Ambil data alamat
-            'moa' => $row['O'], // Ambil data alamat
-            'passport' => $row['P'], // Ambil data alamat
-            'ket' => $row['Q'] // Ambil data alamat
+            'schoolyear' => $row['A'],
+            'semester' => $row['B'],
+            'nim' => $row['C'],
+            'name' => $row['D'],
+            'generation' => $row['E'],
+            'faculty' => $row['F'],
+            'study_program' => $row['G'],
+            'degree' => $row['H'],
+            'gender' => $row['I'],
+            'status' => $row['J'],
+            'fee' => $row['K'],
+            'country_of_origin' => $row['L'],
+            'univ_origin' => $row['M'],
+            'univ_dest' => $row['N'],
+            'exchange_period' => $row['O'],
+            'passport' => $row['P'],
+            'inf' => $row['Q']
         ]);
       }
       

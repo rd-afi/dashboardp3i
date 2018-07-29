@@ -17,13 +17,27 @@ class dosen_tamu extends CI_Controller {
 
 	}
 
-	public function index()
-	{
-    $data['dosen_tamu'] = $this->m_datadsn_tamu->view();
-    // $data['dosen_tamu'] = $this->m_datadsn_tamu->view();
-    // $this->load->view('dosen_tamu', array('error' => ' ' ));
-		$this->load->view('dosen_tamu', $data);
-	}
+  public function index(){
+    if (date('m')<=6) {
+      $smt = "12";
+    } else {
+      $smt = "21";
+    }
+    ini_set('memory_limit', '-1');
+      if(isset($_POST['semester']) && isset($_POST['tahun'])){
+        $data['semester'] = $this->input->post('semester');
+        $data['tahun'] = $this->input->post('tahun');
+        $semester = $this->input->post('semester');
+        $tahun = $this->input->post('tahun');
+        $data['dsn_tamu'] = $this->m_datadsn_tamu->get_dsn_tamu($semester,$tahun);
+      }else{
+        // $data['bulan'] = date('F');
+        $data['semester'] = $smt;
+        $data['tahun'] = date('Y');
+        $data['dsn_tamu'] = $this->m_datadsn_tamu->get_dsn_tamu($smt,date('Y'));
+      }
+    $this->load->view('dosen_tamu',$data);
+  }
 
   public function tambahdosen()
   {
@@ -101,16 +115,17 @@ class dosen_tamu extends CI_Controller {
       if($numrow > 1){
         // Kita push (add) array data ke variabel data
         array_push($data, [
-          'nama' => $row['A'], // Ambil data nama
-          'gender' => $row['B'], // Ambil data gender
-          'negara_asal' => $row['C'], // Ambil data jenis kelamin
-          'nama_perusahaan' => $row['D'], // Ambil data alamat
-          'nama_kegiatan' => $row['E'], // Ambil data alamat
-          'jabatan' => $row['F'], // Ambil data alamat
-          'pendidikan_terakhir' => $row['G'], // Ambil data alamat
-          'tgl_pelaksanaan' => $row['H'], // Ambil data alamat
-          'uraian_kegiatan' => $row['I'], // Ambil data alamat
-          'tempat' => $row['J'] // Ambil data tempat
+          'schoolyear' => $row['A'],
+          'semester' => $row['B'],
+          'name' => $row['C'],
+          'gender' => $row['D'],
+          'country_of_origin' => $row['E'],
+          'institution' => $row['F'],
+          'event' => $row['G'],
+          'position' => $row['H'],
+          'education' => $row['I'],
+          'time_period' => $row['J'],
+          'venue' => $row['K']
         ]);
       }
       

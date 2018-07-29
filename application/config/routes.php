@@ -78,7 +78,4 @@ $route['dosen_tamu/import'] = 'dosen_tamu/import';
 $route['dosen_tamu/tambah'] = 'dosen_tamu/tambahdosen';
 $route['template_dosen_tamu'] = 'dosen_tamu/download_template';
 
-$route['dosen_phd'] = 'dosen_phd';
-$route['dosen_phd/upload'] = 'dosen_phd/form';
-$route['dosen_phd/import'] = 'dosen_phd/import';
-$route['dosen_phd/tambah'] = 'dosen_phd/tambahdosen';
+$route['review'] = 'review';
