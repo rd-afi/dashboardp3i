@@ -7,11 +7,12 @@ $this->load->view('bar/head');
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Data Mahasiswa</h3> </div>
+                    <h3 class="text-primary"><?php echo $title; ?></h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard') ?>">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Data Mahasiswa</li>
+                        <li class="breadcrumb-item"><a href="<?php echo site_url('isiqsaurp3i') ?>">Indikator QS AUR</a></li>
+                        <li class="breadcrumb-item active"><?php echo $title; ?></li>
                     </ol>
                 </div>
             </div>
@@ -51,21 +52,20 @@ $this->load->view('bar/head');
                                                 <th>Schoolyear</th>
                                                 <th>Semester</th>
                                                 <th>NIM</th>
-                                                <th>Nama</th>
-                                                <th>Angkatan</th>
-                                                <th>Fakultas</th>
-                                                <th>Prodi</th>
-                                                <th>Jenjang</th>
+                                                <th>Name</th>
+                                                <th>Generation</th>
+                                                <th>Faculty</th>
+                                                <th>Study Program</th>
+                                                <th>Degree</th>
                                                 <th>Gender</th>
                                                 <th>Status</th>
-                                                <th>BPP</th>
-                                                <th>Negara Asal</th>
-                                                <th>Universitas Destination</th>
+                                                <th>Fee</th>
+                                                <th>Country of Origin</th>
+                                                <th>University of Origin</th>
+                                                <th>University of Destination</th>
                                                 <th>Exchange Period</th>
-                                                <th>LOA</th>
-                                                <th>MOA</th>
-                                                <th>Keterangan</th>
-                                                <th>Keterangan 2</th>
+                                                <th>Information</th>
+                                                <th>Information 2</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -78,21 +78,20 @@ $this->load->view('bar/head');
                                                 <td><?php echo $d->schoolyear ?></td>
                                                 <td><?php echo $d->semester ?></td>
                                                 <td><?php echo $d->nim ?></td>
-                                                <td><?php echo $d->nama ?></td>
-                                                <td><?php echo $d->angkatan ?></td>
-                                                <td><?php echo $d->fakultas ?></td>
-                                                <td><?php echo $d->prodi ?></td>
-                                                <td><?php echo $d->jenjang ?></td>
+                                                <td><?php echo $d->name ?></td>
+                                                <td><?php echo $d->generation ?></td>
+                                                <td><?php echo $d->faculty ?></td>
+                                                <td><?php echo $d->study_program ?></td>
+                                                <td><?php echo $d->degree ?></td>
                                                 <td><?php echo $d->gender ?></td>
                                                 <td><?php echo $d->status ?></td>
-                                                <td><?php echo $d->bpp ?></td>
-                                                <td><?php echo $d->negara_asal ?></td>
+                                                <td><?php echo $d->fee ?></td>
+                                                <td><?php echo $d->country_of_origin ?></td>
+                                                <td><?php echo $d->univ_origin ?></td>
                                                 <td><?php echo $d->univ_dest ?></td>
                                                 <td><?php echo $d->exchange_period ?></td>
-                                                <td><?php echo $d->loa ?></td>
-                                                <td><?php echo $d->moa ?></td>
-                                                <td><?php echo $d->ket ?></td>
-                                                <td><?php echo $d->ket2 ?></td>
+                                                <td><?php echo $d->inf ?></td>
+                                                <td><?php echo $d->inf2 ?></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>

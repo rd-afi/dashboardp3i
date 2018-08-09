@@ -37,7 +37,7 @@ class m_datadsn extends CI_Model {
 	}
 
     function get_dsn ($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -55,7 +55,7 @@ class m_datadsn extends CI_Model {
 	//FACULTY STAFF
 	// International Faculty Staff
 	public function get_number_of_international_staff($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -74,7 +74,7 @@ class m_datadsn extends CI_Model {
 
     // Visiting International Faculty Staff - Inbound
     public function get_number_of_visiting_international_inbound_parttime($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -96,7 +96,7 @@ class m_datadsn extends CI_Model {
 
     // Staff with PhD
     public function get_number_of_faculty_staff_phd_fulltime($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -114,7 +114,7 @@ class m_datadsn extends CI_Model {
          return $query;
     }
     public function get_number_of_faculty_staff_phd_dosen_part($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -131,7 +131,7 @@ class m_datadsn extends CI_Model {
          return $query;
     }
     public function get_number_of_faculty_staff_phd_tamu_part($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -151,7 +151,7 @@ class m_datadsn extends CI_Model {
 
     // Faculty Staff
     public function get_number_of_faculty_staff_fulltime($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -170,7 +170,7 @@ class m_datadsn extends CI_Model {
     }
 
     public function get_number_of_faculty_staff_parttime_dosen($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -187,7 +187,7 @@ class m_datadsn extends CI_Model {
          return $query;
     }
     public function get_number_of_faculty_staff_parttime_tamu($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;

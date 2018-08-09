@@ -88,7 +88,7 @@ class m_datamhs extends CI_Model {
     }
 
     function get_mhs ($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -104,7 +104,7 @@ class m_datamhs extends CI_Model {
     }
 
     function get_mhs_io ($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -120,7 +120,7 @@ class m_datamhs extends CI_Model {
     }
 
     public function get_number_of_overall_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -138,7 +138,7 @@ class m_datamhs extends CI_Model {
     }
 
     public function get_number_of_overall_students_domestic($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -156,7 +156,7 @@ class m_datamhs extends CI_Model {
     }
 
     public function get_number_of_overall_students_international($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -175,7 +175,7 @@ class m_datamhs extends CI_Model {
 
     // INDIKATOR STUDENT - UNDERGRADUATE
     public function get_number_of_undergraduate_international_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -192,7 +192,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_undergraduate_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -209,7 +209,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_undergraduate_students_domestic($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -226,7 +226,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_undergraduate_inbound_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -243,7 +243,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_undergraduate_outbound_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -260,7 +260,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_undergraduate_first_year($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -281,7 +281,7 @@ class m_datamhs extends CI_Model {
 
     // INDIKATOR STUDENT - GRADUATE/POSTGRADUATE
     public function get_number_of_grapost_international_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -298,7 +298,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_grapost_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -315,7 +315,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_grapost_students_domestic($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -332,7 +332,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_grapost_inbound_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -349,7 +349,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_number_of_grapost_outbound_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -368,7 +368,7 @@ class m_datamhs extends CI_Model {
 
     // INDIKATOR STUDENT - OVERALL
     public function get_number_of_female_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -386,7 +386,7 @@ class m_datamhs extends CI_Model {
     }
 
     public function get_number_of_international_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -404,7 +404,7 @@ class m_datamhs extends CI_Model {
     }
 
     public function get_number_of_male_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -422,7 +422,7 @@ class m_datamhs extends CI_Model {
     }
 
     public function get_number_of_inbound_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -440,7 +440,7 @@ class m_datamhs extends CI_Model {
     }
 
     public function get_number_of_outbound_students($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -459,7 +459,7 @@ class m_datamhs extends CI_Model {
 
     //AVERAGE TUITION FEES
     public function get_fees_of_overall_students_domestic($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -476,7 +476,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_fees_of_overall_students_international($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -495,7 +495,7 @@ class m_datamhs extends CI_Model {
 
 
     public function get_fees_of_undergraduate_students_domestic($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -512,7 +512,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_fees_of_undergraduate_students_international($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -530,7 +530,7 @@ class m_datamhs extends CI_Model {
     }
 
     public function get_fees_of_grapost_students_domestic($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;
@@ -547,7 +547,7 @@ class m_datamhs extends CI_Model {
          return $query;
     }
     public function get_fees_of_grapost_students_international($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;

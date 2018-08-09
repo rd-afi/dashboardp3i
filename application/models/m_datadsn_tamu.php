@@ -37,7 +37,7 @@ class m_datadsn_tamu extends CI_Model {
 	}
 
     function get_dsn_tamu($semester,$tahun){
-        $year = substr($tahun, -2);
+        $year = substr($tahun, 0, 2);
         $year1 = $year+1;
         $year2 = $year1+1;
         $smt = $semester;

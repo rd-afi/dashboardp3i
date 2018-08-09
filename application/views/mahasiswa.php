@@ -38,10 +38,10 @@ $this->load->view('bar/head');
                         ?> 
                             <div class="card">
                                 <div class="card-body">
-                                    <form action="<?php echo site_url('mahasiswa/index')?>" class="form-inline" method="POST">
+                                    <form action="<?php echo site_url('mahasiswa')?>" class="form-inline" method="POST">
                                     <table class="table-responsive display nowrap" style="width:100%">
                                     <div class="form-group">
-                                        <tr>
+                                        <!-- <tr>
                                             <td class="p-10">
                                             <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
                                                 <option selected="" disabled=""> - Semester - </option>
@@ -68,6 +68,29 @@ $this->load->view('bar/head');
                                             <td class="p-10" style="width:100%">
                                                 <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
                                             </td>
+                                        </tr> -->
+                                        <tr>
+                                            <td class="p-10" style="width:100%">
+                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                            <option selected="" disabled="">Pilih Semester & Tahun</option>
+                                            <?php
+                                                for($i=16;$i<=date('y');$i++){
+                                                    $x = $i + 1;
+                                                    $y = $x + 1;
+                                                // if($i == date('y')){
+                                                //     echo '<option selected disabled>Pilih Tahun Semester</option>';
+                                                // }else{
+                                                    echo '<option value="1-'.$i.$x.'/2-'.$i.$x.'"> Ganjil&nbsp;&ensp;- '.$i.'/'.$x.' | Genap&nbsp;- '.$i.'/'.$x.'</option>';
+                                                    echo '<option value="2-'.$i.$x.'/1-'.$x.$y.'"> Genap&nbsp;- '.$i.'/'.$x.' | Ganjil&nbsp;&nbsp;&nbsp;- '.$x.'/'.$y.'</option>';
+                                                // }   
+                                                }
+                                            ?>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
+                                            </td>
                                         </tr>
                                     </div>
                                     </table>
@@ -76,12 +99,17 @@ $this->load->view('bar/head');
                             </div>
                             <div class="card">
                                 <center><h4> Periode Semester <?php
+                                $year = substr($tahun, 0,2);
+                                $year1 = $year+1;
+                                $year2 = $year1+1;
                                 if ($semester == "12") {
-                                    $smt = "Ganjil - Genap";
+                                    $smt1 = "Ganjil - ".$year.$year1;
+                                    $smt2 = "Genap - ".$year.$year1;
                                 } else {
-                                    $smt = "Genap - Ganjil";
+                                    $smt1 = "Genap - ".$year.$year1;
+                                    $smt2 = "Ganjil - ".$year1.$year2;
                                 }
-                                echo $smt." ".$tahun; ?></h4></center>
+                                echo $smt1." & ".$smt2; ?></h4></center>
                                 <div class="card-body p-b-0">
                                     <!-- Tab panes -->
                                     <table id="myTable" class="table table-responsive table-striped table-bordered table-hover display nowrap" style="width:100%">

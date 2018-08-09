@@ -25,17 +25,23 @@ class dosen extends CI_Controller {
     }
     ini_set('memory_limit', '-1');
     $data['dosen'] = $this->m_datadsn->view();
-      if(isset($_POST['semester']) && isset($_POST['tahun'])){
-        $data['semester'] = $this->input->post('semester');
-        $data['tahun'] = $this->input->post('tahun');
-        $semester = $this->input->post('semester');
-        $tahun = $this->input->post('tahun');
+
+      if(isset($_POST['tahun'])){
+        $st = $this->input->post('tahun');
+        $y1 = substr($st, 2, 4);
+        $y2 = substr($st, 9, 4);
+        $s1 = substr($st, 0, 1);
+        $s2 = substr($st, 7, 1);
+        $data['semester'] = $s1.$s2;
+        $data['tahun'] = $y1;
+        $semester = $s1.$s2;
+        $tahun = $y1;
         $data['dsn'] = $this->m_datadsn->get_dsn($semester,$tahun);
       }else{
         // $data['bulan'] = date('F');
         $data['semester'] = $smt;
-        $data['tahun'] = date('Y');
-        $data['dsn'] = $this->m_datadsn->get_dsn($smt,date('Y'));
+        $data['tahun'] = date('y');
+        $data['dsn'] = $this->m_datadsn->get_dsn($smt,date('y'));
       }
     $this->load->view('dosen',$data);
   }
@@ -49,7 +55,7 @@ class dosen extends CI_Controller {
   }
 
   public function download_template(){       
-    force_download('template/contoh_template_data_dosen.xlsx',NULL);
+    force_download('template/Template_Data_Dosen.xlsx',NULL);
   }
 
   public function aksi_upload(){

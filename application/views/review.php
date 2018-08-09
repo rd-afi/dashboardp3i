@@ -36,7 +36,7 @@ function usd($angka){
                                     <form action="<?php echo site_url('review')?>" class="form-inline" method="POST">
                                     <table class="table-responsive display nowrap" style="width:100%">
                                     <div class="form-group">
-                                        <tr>
+                                        <!-- <tr>
                                             <td class="p-10">
                                             <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
                                                 <option selected="" disabled=""> - Semester - </option>
@@ -88,6 +88,49 @@ function usd($angka){
                                             <td class="p-10" style="width:100%">
                                                 <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
                                             </td>
+                                        </tr> -->
+                                        <tr>
+                                            <td class="p-10" style="width:100%">
+                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                            <option selected="" disabled="">Pilih Semester & Tahun</option>
+                                            <?php
+                                                for($i=16;$i<=date('y');$i++){
+                                                    $x = $i + 1;
+                                                    $y = $x + 1;
+                                                // if($i == date('y')){
+                                                //     echo '<option selected disabled>Pilih Tahun Semester</option>';
+                                                // }else{
+                                                    echo '<option value="1-'.$i.$x.'/2-'.$i.$x.'"> Ganjil&nbsp;&ensp;- '.$i.'/'.$x.' | Genap&nbsp;- '.$i.'/'.$x.'</option>';
+                                                    echo '<option value="2-'.$i.$x.'/1-'.$x.$y.'"> Genap&nbsp;- '.$i.'/'.$x.' | Ganjil&nbsp;&nbsp;&nbsp;- '.$x.'/'.$y.'</option>';
+                                                // }   
+                                                }
+                                            ?>
+                                            </select>
+                                            </td>
+
+                                            <td><center><h4> & </h4></center></td>
+
+                                            <td class="p-10" style="width:100%">
+                                            <select name="tahun2" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                            <option selected="" disabled="">Pilih Semester & Tahun</option>
+                                            <?php
+                                                for($i=16;$i<=date('y');$i++){
+                                                    $x = $i + 1;
+                                                    $y = $x + 1;
+                                                // if($i == date('y')){
+                                                //     echo '<option selected disabled>Pilih Tahun Semester</option>';
+                                                // }else{
+                                                    echo '<option value="1-'.$i.$x.'/2-'.$i.$x.'"> Ganjil&nbsp;&ensp;- '.$i.'/'.$x.' | Genap&nbsp;- '.$i.'/'.$x.'</option>';
+                                                    echo '<option value="2-'.$i.$x.'/1-'.$x.$y.'"> Genap&nbsp;- '.$i.'/'.$x.' | Ganjil&nbsp;&nbsp;&nbsp;- '.$x.'/'.$y.'</option>';
+                                                // }   
+                                                }
+                                            ?>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
+                                            </td>
                                         </tr>
                                     </div>
                                     </table>
@@ -100,13 +143,32 @@ function usd($angka){
 
                             </div> -->
                             <div class="card-body">
-                                <center><h4> Periode Semester <?php
+                                <center><h4>Periode Semester</h4></center>
+                                <center><h4><?php
+                                $year = substr($tahun, 0,2);
+                                $year1 = $year+1;
+                                $year2 = $year1+1;
+
+                                $year33 = substr($tahun2, 0,2);
+                                $year12 = $year33+1;
+                                $year22 = $year12+1;
+
                                 if ($semester == "12") {
-                                    $smt = "Ganjil - Genap";
+                                    $smt1 = "Ganjil - ".$year.$year1;
+                                    $smt2 = "Genap - ".$year.$year1;
                                 } else {
-                                    $smt = "Genap - Ganjil";
+                                    $smt1 = "Genap - ".$year.$year1;
+                                    $smt2 = "Ganjil - ".$year1.$year2;
                                 }
-                                echo $smt." ".$tahun." & ".$tahun2; ?></h4></center>
+
+                                if ($semester2 == "12") {
+                                    $smt12 = "Ganjil - ".$year33.$year12;
+                                    $smt22 = "Genap - ".$year33.$year12;
+                                } else {
+                                    $smt12 = "Genap - ".$year33.$year12;
+                                    $smt22 = "Ganjil - ".$year12.$year22;
+                                }
+                                echo $smt1." & ".$smt2." -- ".$smt12." & ".$smt22; ?></h4></center>
 
                                 <div class="row">
                                     <div class="col-lg-12">

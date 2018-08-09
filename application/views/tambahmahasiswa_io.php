@@ -50,25 +50,20 @@ $this->load->view('bar/head');
                         ?> 
                             <div class="card">
                                 <div class="card-body p-b-0">
-                                    <!-- <h4 class="card-title">Customtab2 Tab</h4> -->
-                                    <!-- Nav tabs -->
                                     <ul class="nav nav-tabs customtab2" role="tablist">
                                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#upload" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Uploads</span></a> </li>
-                                        <!-- <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#input" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Input</span></a> </li> -->
                                     </ul>
                                     <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="upload" role="tabpanel">
                                             <div class="p-20">
                                                     <div class="button-list">
-                                                <!-- <form action="<?php echo base_url();?>datadsn/importir/" method="post" enctype="multipart/form-data"> -->
                                                 <form action="<?php echo base_url();?>mahasiswa/upload_io/" method="post" enctype="multipart/form-data">
                                                         <div class="btn-group">
                                                             <input class="btn btn-success" type="file" name="file"/>
                                                             <input class="btn btn-primary" type="submit" name="preview" value="Upload file"/>
                                                         </div>
                                                 </form>
-                                                <!-- <button class="btn btn-success btn-rounded ">Preview</button> -->
                                                     </div>
                                             </div>
                                             <?php

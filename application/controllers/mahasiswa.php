@@ -27,20 +27,25 @@ class mahasiswa extends CI_Controller {
     }
     ini_set('memory_limit', '-1');
     $data['mahasiswa_sisfo'] = $this->m_datamhs->view();
-      if(isset($_POST['semester']) && isset($_POST['tahun'])){
-        $data['semester'] = $this->input->post('semester');
-        $data['tahun'] = $this->input->post('tahun');
-        $semester = $this->input->post('semester');
-        $tahun = $this->input->post('tahun');
-        $data['mhs'] = $this->m_datamhs->get_mhs($semester,$tahun);
-      }else{
-        // $data['bulan'] = date('F');
-        $data['semester'] = $smt;
-        $data['tahun'] = date('Y');
-        $data['mhs'] = $this->m_datamhs->get_mhs($smt,date('Y'));
-        // $data['mhs_all'] = $this->m_datamhs->view();
-        // $data['absensi'] = $this->m_data->get_absensi_non(date('F'),date('Y'));
-      }
+
+    if(isset($_POST['tahun'])){
+      $st = $this->input->post('tahun');
+      $y1 = substr($st, 2, 4);
+      $y2 = substr($st, 9, 4);
+      $s1 = substr($st, 0, 1);
+      $s2 = substr($st, 7, 1);
+      $data['semester'] = $s1.$s2;
+      $data['tahun'] = $y1;
+      $semester = $s1.$s2;
+      $tahun = $y1;
+      $data['mhs'] = $this->m_datamhs->get_mhs($semester,$tahun);
+    }else{
+      // $data['bulan'] = date('F');
+      $data['semester'] = $smt;
+      $data['tahun'] = date('y');
+      $data['mhs'] = $this->m_datamhs->get_mhs($smt,date('y'));
+      // $data['mhs_all'] = $this->m_datamhs->view();
+    }
     $this->load->view('mahasiswa',$data);
 	}
 
@@ -54,7 +59,7 @@ class mahasiswa extends CI_Controller {
   }
 
   public function download_template_mhs(){       
-    force_download('template/contoh_template_data_mahasiswa.xlsx',NULL);
+    force_download('template/Template_Data_Mahasiswa.xlsx',NULL);
   }
 
   public function aksi_upload(){
@@ -176,19 +181,23 @@ class mahasiswa extends CI_Controller {
       $smt = "21";
     }
     ini_set('memory_limit', '-1');
-      if(isset($_POST['semester']) && isset($_POST['tahun'])){
-        $data['semester'] = $this->input->post('semester');
-        $data['tahun'] = $this->input->post('tahun');
-        $semester = $this->input->post('semester');
-        $tahun = $this->input->post('tahun');
+      if(isset($_POST['tahun'])){
+        $st = $this->input->post('tahun');
+        $y1 = substr($st, 2, 4);
+        $y2 = substr($st, 9, 4);
+        $s1 = substr($st, 0, 1);
+        $s2 = substr($st, 7, 1);
+        $data['semester'] = $s1.$s2;
+        $data['tahun'] = $y1;
+        $semester = $s1.$s2;
+        $tahun = $y1;
         $data['mhs_io'] = $this->m_datamhs->get_mhs_io($semester,$tahun);
       }else{
         // $data['bulan'] = date('F');
         $data['semester'] = $smt;
-        $data['tahun'] = date('Y');
-        $data['mhs_io'] = $this->m_datamhs->get_mhs_io($smt,date('Y'));
+        $data['tahun'] = date('y');
+        $data['mhs_io'] = $this->m_datamhs->get_mhs_io($smt,date('y'));
         // $data['mhs_all'] = $this->m_datamhs->view();
-        // $data['absensi'] = $this->m_data->get_absensi_non(date('F'),date('Y'));
       }
     $this->load->view('mahasiswa_io',$data);
   }
@@ -201,7 +210,7 @@ class mahasiswa extends CI_Controller {
     $this->load->view('tambahmahasiswa_io', $data);
   }
   public function download_template_mhs_io(){       
-    force_download('template/contoh_template_data_mahasiswa_io.xlsx',NULL);
+    force_download('template/Template_Data_Mahasiswa_IO.xlsx',NULL);
   }
   public function aksi_upload_io(){
     ini_set('memory_limit', '-1');

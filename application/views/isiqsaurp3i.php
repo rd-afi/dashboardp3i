@@ -36,7 +36,7 @@ function usd($angka){
                                     <form action="<?php echo site_url('isiqsaurp3i')?>" class="form-inline" method="POST">
                                     <table class="table-responsive display nowrap" style="width:100%">
                                     <div class="form-group">
-                                        <tr>
+                                        <!-- <tr>
                                             <td class="p-10">
                                             <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
                                                 <option selected="" disabled=""> - Semester - </option>
@@ -63,6 +63,29 @@ function usd($angka){
                                             <td class="p-10" style="width:100%">
                                                 <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
                                             </td>
+                                        </tr> -->
+                                        <tr>
+                                            <td class="p-10" style="width:100%">
+                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
+                                            <option selected="" disabled="">Pilih Semester & Tahun</option>
+                                            <?php
+                                                for($i=16;$i<=date('y');$i++){
+                                                    $x = $i + 1;
+                                                    $y = $x + 1;
+                                                // if($i == date('y')){
+                                                //     echo '<option selected disabled>Pilih Tahun Semester</option>';
+                                                // }else{
+                                                    echo '<option value="1-'.$i.$x.'/2-'.$i.$x.'"> Ganjil&nbsp;&ensp;- '.$i.'/'.$x.' | Genap&nbsp;- '.$i.'/'.$x.'</option>';
+                                                    echo '<option value="2-'.$i.$x.'/1-'.$x.$y.'"> Genap&nbsp;- '.$i.'/'.$x.' | Ganjil&nbsp;&nbsp;&nbsp;- '.$x.'/'.$y.'</option>';
+                                                // }   
+                                                }
+                                            ?>
+                                            </select>
+                                            </td>
+
+                                            <td class="p-10" style="width:100%">
+                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
+                                            </td>
                                         </tr>
                                     </div>
                                     </table>
@@ -76,12 +99,17 @@ function usd($angka){
                             </div> -->
                             <div class="card-body">
                                 <center><h4> Periode Semester <?php
+                                $year = substr($tahun, 0,2);
+                                $year1 = $year+1;
+                                $year2 = $year1+1;
                                 if ($semester == "12") {
-                                    $smt = "Ganjil - Genap";
+                                    $smt1 = "Ganjil - ".$year.$year1;
+                                    $smt2 = "Genap - ".$year.$year1;
                                 } else {
-                                    $smt = "Genap - Ganjil";
+                                    $smt1 = "Genap - ".$year.$year1;
+                                    $smt2 = "Ganjil - ".$year1.$year2;
                                 }
-                                echo $smt." ".$tahun; ?></h4></center>
+                                echo $smt1." & ".$smt2; ?></h4></center>
                                 <div class="basic-form">
                                     <form>
                                         <div class="form-group table-responsive">
@@ -130,19 +158,17 @@ function usd($angka){
                                                 </tr>
                                                 <tr>
                                                     <td>Staff with PhD</td>
-                                                    <!-- <td> <?php echo $staff_phd_full ?> </td> -->
-                                                    <td><a href="<?php echo site_url('isiqsaurp3i/efidence_phd_staff_dosen_full') ?>"> 
+                                                    <td><a target="_blank" href="<?php echo site_url('isiqsaurp3i/efidence_phd_staff_dosen_full') ?>"> 
                                                         <?php echo $staff_phd_full ?></a></td>
                                                     <td> <?php echo $staff_phd_part = $staff_phd_dosen_part + $staff_phd_tamu_part ?> </td>
-                                                    <!-- <td> <?php echo $staff_phd_part = $staff_phd_dosen_part + $staff_phd_tamu_part ?> </td> -->
                                                     <td> <?php echo $staff_phd_full + $staff_phd_part ?> </td>
                                                     <td> <?php echo round($staff_phd_full + ($staff_phd_part / 3)) ?> </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Faculty Staff</td>
-                                                    <td><a href="<?php echo site_url('isiqsaurp3i/efidence_faculty_staff_dosen_full') ?>"> 
+                                                    <td><a target="_blank" href="<?php echo site_url('isiqsaurp3i/efidence_faculty_staff_dosen_full') ?>"> 
                                                         <?php echo $staff_dosen_full ?></a></td>
-                                                    <td><a href="<?php echo site_url('isiqsaurp3i/efidence_faculty_staff_dosen_parttime') ?>"> 
+                                                    <td><a target="_blank" href="<?php echo site_url('isiqsaurp3i/efidence_faculty_staff_dosen_parttime') ?>"> 
                                                         <?php echo $staff_tamu_part ?></a></td><!-- 
                                                     <td><a href="<?php echo site_url('isiqsaurp3i/efidence_faculty_staff_dosen_parttime') ?>"> 
                                                         <?php echo $staff_parttime = ($staff_dosen_part + $staff_tamu_part) ?></a></td> -->
@@ -161,7 +187,8 @@ function usd($angka){
                                                 </tr>
                                                 <tr>
                                                     <td>Undergraduate International Student</td>
-                                                    <td> <?php echo $undergraduate_international_students ?> </td>
+                                                    <td><a target="_blank" href="<?php echo site_url('isiqsaurp3i/efidence_undergraduate_international_fulltime') ?>">
+                                                        <?php echo $undergraduate_international_students ?> </td>
                                                     <td>0</td>
                                                     <td> <?php echo $undergraduate_international_students ?> </td>
                                                     <td> <?php echo $undergraduate_international_students ?> </td>
@@ -189,7 +216,8 @@ function usd($angka){
                                                 </tr>
                                                 <tr>
                                                     <td>Undergraduate student - First Year</td>
-                                                    <td> <?php echo $undergraduate_firstyear_student ?> </td>
+                                                    <td><a target="_blank" href="<?php echo site_url('isiqsaurp3i/efidence_undergraduate_first_fulltime') ?>">
+                                                        <?php echo $undergraduate_firstyear_student ?> </td>
                                                     <td>0</td>
                                                     <td> <?php echo $undergraduate_firstyear_student ?> </td>
                                                     <td> <?php echo $undergraduate_firstyear_student ?> </td>

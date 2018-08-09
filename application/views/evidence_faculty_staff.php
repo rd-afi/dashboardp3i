@@ -10,12 +10,12 @@ $this->load->view('bar/head');
             <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-primary">Evidence Faculty Staff - Full Time</h3> </div>
+                    <h3 class="text-primary"><?php echo $title; ?></h3> </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="<?php echo site_url('dashboard') ?>">Dashboard</a></li>
                         <li class="breadcrumb-item"><a href="<?php echo site_url('isiqsaurp3i') ?>">Indikator QS AUR</a></li>
-                        <li class="breadcrumb-item active">Evidence Faculty Staff - Full Time</li>
+                        <li class="breadcrumb-item active"><?php echo $title; ?></li>
                     </ol>
                 </div>
             </div>
@@ -53,15 +53,14 @@ $this->load->view('bar/head');
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>School Year</th>
+                                                <th>Semester</th>
                                                 <th>NIP</th>
-                                                <th>Nama</th>
-                                                <th>Posisi</th>
-                                                <th>Status Pegawai</th>
-                                                <th>SK Pertama</th>
-                                                <th>SK Posisi</th>
-                                                <th>TMT</th>
-                                                <th>Pendidikan</th>
-                                                <th>Kewarganegaraan</th>
+                                                <th>Name</th>
+                                                <th>Position</th>
+                                                <th>Employee Status</th>
+                                                <th>Education</th>
+                                                <th>Country of Origin</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -71,15 +70,14 @@ $this->load->view('bar/head');
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++ ?></td>
+                                                <td><?php echo $d->schoolyear ?></td>
+                                                <td><?php echo $d->semester ?></td>
                                                 <td><?php echo $d->nip ?></td>
-                                                <td><?php echo $d->nama ?></td>
-                                                <td><?php echo $d->posisi ?></td>
-                                                <td><?php echo $d->employeestatus ?></td>
-                                                <td><?php echo $d->sk_pertama ?></td>
-                                                <td><?php echo $d->sk_posisi ?></td>
-                                                <td><?php echo $d->tmt ?></td>
-                                                <td><?php echo $d->pendidikan ?></td>
-                                                <td><?php echo $d->kewarganegaraan ?></td>
+                                                <td><?php echo $d->name ?></td>
+                                                <td><?php echo $d->position ?></td>
+                                                <td><?php echo $d->employee_status ?></td>
+                                                <td><?php echo $d->education ?></td>
+                                                <td><?php echo $d->country_of_origin ?></td>
                                             </tr>
                                             <?php } ?>
                                         </tbody>
