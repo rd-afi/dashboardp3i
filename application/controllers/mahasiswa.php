@@ -6,7 +6,7 @@ class mahasiswa extends CI_Controller {
 
   function __construct(){
 		parent::__construct();
-        // $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+    // Me-Load helper, library, dan model yang dibutuhkan
     $this->load->helper(array('form', 'url'));
     $this->load->library('datatables');
     $this->load->model('m_datamhs');
@@ -20,13 +20,16 @@ class mahasiswa extends CI_Controller {
   //---------------------------------- SISFO -----------------------------
 
 	public function index(){
+    // Untuk men-set limit menjadi tanpa limit
+    // Untuk mencegah limit memori pada saat me-load data
+    ini_set('memory_limit', '-1');
+
+    // Mengecek bulan sekarang untuk menentukan Semester ganjil genap
     if (date('m')<=6) {
       $smt = "12";
     } else {
       $smt = "21";
     }
-    ini_set('memory_limit', '-1');
-    $data['mahasiswa_sisfo'] = $this->m_datamhs->view();
 
     if(isset($_POST['tahun'])){
       $st = $this->input->post('tahun');
@@ -40,31 +43,29 @@ class mahasiswa extends CI_Controller {
       $tahun = $y1;
       $data['mhs'] = $this->m_datamhs->get_mhs($semester,$tahun);
     }else{
-      // $data['bulan'] = date('F');
       $data['semester'] = $smt;
       $data['tahun'] = date('y');
       $data['mhs'] = $this->m_datamhs->get_mhs($smt,date('y'));
-      // $data['mhs_all'] = $this->m_datamhs->view();
     }
     $this->load->view('mahasiswa',$data);
 	}
 
+  // UNTUK TAMBAH MAHASISWA
   public function tambahmhs()
   {
     ini_set('memory_limit', '-1');
-    $data['mahasiswa_sisfo'] = $this->m_datamhs->view();
-    // $data['user'] = $this->m_datadsn->tampil_data()->result();
-    // $this->load->view('dosen', array('error' => ' ' ));
-    $this->load->view('tambahmahasiswa', $data);
+    $this->load->view('tambahmahasiswa');
   }
 
+  // UNTUK DOWNLOAD TEMPLATE EXCEL
   public function download_template_mhs(){       
     force_download('template/Template_Data_Mahasiswa.xlsx',NULL);
   }
 
+  // UNTUK MENGUPLOAD EXCEL
   public function aksi_upload(){
     ini_set('memory_limit', '-1');
-    $this->load->library('upload'); // Load librari upload
+    $this->load->library('upload'); // Load library upload
 
     $config['upload_path'] = './excel/';
     $config['allowed_types'] = 'xlsx';
@@ -74,15 +75,6 @@ class mahasiswa extends CI_Controller {
  
     // $this->load->library('upload', $config);
     $this->upload->initialize($config); // Load konfigurasi uploadnya
-    // if($this->upload->do_upload('file')){ // Lakukan upload dan Cek jika proses upload berhasil
-    //   // Jika berhasil :
-    //   $error = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');
-    //   return $this->load->view('mahasiswa', $error);
-    // }else{
-    //   // Jika gagal :
-    //   $data = array('result' => 'failed', 'file' => '', 'error' => $this->upload->display_errors());
-    //   return $this->load->view('mahasiswa', $data);
-    // }
  
     if ( ! $this->upload->do_upload('file')){
       $error = array('error' => $this->upload->display_errors());
@@ -93,7 +85,7 @@ class mahasiswa extends CI_Controller {
     }
   }
 
-
+  // UNTUK MEMPREVIEW DATA EXCEL YANG SUDAH DIUPLOAD
   public function form(){
     ini_set('memory_limit', '-1');
     $data = array(); // Buat variabel $data sebagai array
@@ -193,46 +185,31 @@ class mahasiswa extends CI_Controller {
         $tahun = $y1;
         $data['mhs_io'] = $this->m_datamhs->get_mhs_io($semester,$tahun);
       }else{
-        // $data['bulan'] = date('F');
         $data['semester'] = $smt;
         $data['tahun'] = date('y');
         $data['mhs_io'] = $this->m_datamhs->get_mhs_io($smt,date('y'));
-        // $data['mhs_all'] = $this->m_datamhs->view();
       }
     $this->load->view('mahasiswa_io',$data);
   }
 
   public function tambahmhs_io()
   {
-    $data['mahasiswa_io'] = $this->m_datamhs->view_io();
-    // $data['user'] = $this->m_datadsn->tampil_data()->result();
-    // $this->load->view('dosen', array('error' => ' ' ));
-    $this->load->view('tambahmahasiswa_io', $data);
+    $this->load->view('tambahmahasiswa_io');
   }
   public function download_template_mhs_io(){       
     force_download('template/Template_Data_Mahasiswa_IO.xlsx',NULL);
   }
   public function aksi_upload_io(){
     ini_set('memory_limit', '-1');
-    $this->load->library('upload'); // Load librari upload
+    $this->load->library('upload'); // Load library upload
 
     $config['upload_path'] = './excel/';
     $config['allowed_types'] = 'xlsx';
     $config['max_size'] = '10240';
     $config['overwrite'] = true;
     $config['file_name'] = 'import_data';
- 
-    // $this->load->library('upload', $config);
+
     $this->upload->initialize($config); // Load konfigurasi uploadnya
-    // if($this->upload->do_upload('file')){ // Lakukan upload dan Cek jika proses upload berhasil
-    //   // Jika berhasil :
-    //   $error = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');
-    //   return $this->load->view('mahasiswa', $error);
-    // }else{
-    //   // Jika gagal :
-    //   $data = array('result' => 'failed', 'file' => '', 'error' => $this->upload->display_errors());
-    //   return $this->load->view('mahasiswa', $data);
-    // }
  
     if ( ! $this->upload->do_upload('file')){
       $error = array('error' => $this->upload->display_errors());
@@ -249,7 +226,6 @@ class mahasiswa extends CI_Controller {
     $data = array(); // Buat variabel $data sebagai array
     
     if(isset($_POST['preview'])){ // Jika user menekan tombol Preview pada form
-      // lakukan upload file dengan memanggil function upload yang ada di SiswaModel.php
       $upload = $this->m_datamhs->upload_file_io($this->filename);
       
       if($upload['result'] == "success"){ // Jika proses upload sukses
@@ -260,7 +236,7 @@ class mahasiswa extends CI_Controller {
         $loadexcel = $excelreader->load('excel/'.$this->filename.'.xlsx'); // Load file yang tadi diupload ke folder excel
         $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
         
-        // Masukan variabel $sheet ke dalam array data yang nantinya akan di kirim ke file form.php
+        // Masukan variabel $sheet ke dalam array data yang nantinya akan di kirim ke view
         // Variabel $sheet tersebut berisi data-data yang sudah diinput di dalam excel yang sudha di upload sebelumnya
         $data['sheet'] = $sheet; 
       }else{ // Jika proses upload gagal
@@ -280,13 +256,12 @@ class mahasiswa extends CI_Controller {
     $loadexcel = $excelreader->load('excel/'.$this->filename.'.xlsx'); // Load file yang telah diupload ke folder excel
     $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
     
-    // Buat sebuah variabel array untuk menampung array data yg akan kita insert ke database
+    // Buat sebuah variabel array untuk menampung array data yg akan diinsert ke database
     $data = [];
     
     $numrow = 1;
     foreach($sheet as $row){
-      // Cek $numrow apakah lebih dari 1
-      // Artinya karena baris pertama adalah nama-nama kolom
+      // Cek $numrow apakah lebih dari 1, karena baris paling atas adalah nama-nama kolom
       // Jadi dilewat saja, tidak usah diimport
       if($numrow > 1){
         // Kita push (add) array data ke variabel data
@@ -317,7 +292,7 @@ class mahasiswa extends CI_Controller {
     // Panggil fungsi insert_multiple yg telah kita buat sebelumnya di model
     $this->m_datamhs->insert_multiple_io($data);
     
-    redirect("mahasiswa_io"); // Redirect ke halaman awal (ke controller siswa fungsi index)
+    redirect("mahasiswa_io");
   }
 
 

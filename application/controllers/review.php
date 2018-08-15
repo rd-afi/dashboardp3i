@@ -17,7 +17,11 @@ class review extends CI_Controller {
 
 	public function index()
 	{
+		// Untuk men-set limit menjadi tanpa limit
+    	// Untuk mencegah limit memori pada saat me-load data
 		ini_set('memory_limit', '-1');
+
+		// Mengecek bulan sekarang untuk menentukan Semester ganjil genap
 		if (date('m')<=6) {
 	    	$smt = "12";
 	    } else {
@@ -44,16 +48,6 @@ class review extends CI_Controller {
 	        $data['tahun2'] = $y12;
 	        $semester2 = $s12.$s22;
 	        $tahun2 = $y12;
-
-	        // $data['semester'] = $this->input->post('semester');
-	        // $data['semester2'] = $this->input->post('semester2');
-	        // $data['tahun'] = $this->input->post('tahun');
-	        // $data['tahun2'] = $this->input->post('tahun2');
-	        // $semester = $this->input->post('semester');
-	        // $semester2 = $this->input->post('semester2');
-	        // $tahun = $this->input->post('tahun');
-	        // $tahun2 = $this->input->post('tahun2');
-	        
 
 	        // INDIKATOR FACULTY STAFF
 			$data['staff_international'] = $this->m_datadsn->get_number_of_international_staff($semester,$tahun)->num_rows();

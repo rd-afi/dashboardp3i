@@ -6,7 +6,7 @@ class dosen_tamu extends CI_Controller {
 
   function __construct(){
 		parent::__construct();
-        // $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+    // Me-Load helper, library, dan model yang dibutuhkan
     $this->load->helper(array('form', 'url'));
     $this->load->library('datatables');
     $this->load->model('m_datadsn_tamu');
@@ -18,12 +18,16 @@ class dosen_tamu extends CI_Controller {
 	}
 
   public function index(){
+    // Untuk men-set limit menjadi tanpa limit
+    // Untuk mencegah limit memori pada saat me-load data
+    ini_set('memory_limit', '-1');
+
+    // Mengecek bulan sekarang untuk menentukan Semester ganjil genap
     if (date('m')<=6) {
       $smt = "12";
     } else {
       $smt = "21";
     }
-    ini_set('memory_limit', '-1');
       if(isset($_POST['tahun'])){
         $st = $this->input->post('tahun');
         $y1 = substr($st, 2, 4);
@@ -46,10 +50,7 @@ class dosen_tamu extends CI_Controller {
 
   public function tambahdosen()
   {
-    $data['dosen_tamu'] = $this->m_datadsn_tamu->view();
-    // $data['user'] = $this->m_datadsn->tampil_data()->result();
-    // $this->load->view('dosen', array('error' => ' ' ));
-    $this->load->view('tambahdosen_tamu', $data);
+    $this->load->view('tambahdosen_tamu');
   }
 
   public function download_template(){       
@@ -79,7 +80,7 @@ class dosen_tamu extends CI_Controller {
     $data = array(); // Buat variabel $data sebagai array
     
     if(isset($_POST['preview'])){ // Jika user menekan tombol Preview pada form
-      // lakukan upload file dengan memanggil function upload yang ada di SiswaModel.php
+      // lakukan upload file dengan memanggil function upload yang ada di model
       $upload = $this->m_datadsn_tamu->upload_file($this->filename);
       
       if($upload['result'] == "success"){ // Jika proses upload sukses
@@ -90,7 +91,7 @@ class dosen_tamu extends CI_Controller {
         $loadexcel = $excelreader->load('excel/'.$this->filename.'.xlsx'); // Load file yang tadi diupload ke folder excel
         $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
         
-        // Masukan variabel $sheet ke dalam array data yang nantinya akan di kirim ke file form.php
+        // Masukan variabel $sheet ke dalam array data yang nantinya akan di kirim ke view
         // Variabel $sheet tersebut berisi data-data yang sudah diinput di dalam excel yang sudha di upload sebelumnya
         $data['sheet'] = $sheet; 
       }else{ // Jika proses upload gagal

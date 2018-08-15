@@ -5,9 +5,7 @@
 $this->load->view('bar/head');
 ?>
 
-        <!-- Page wrapper  -->
         <div class="page-wrapper">
-            <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
                     <h3 class="text-primary">Dashboard</h3> </div>
@@ -18,120 +16,22 @@ $this->load->view('bar/head');
                     </ol>
                 </div>
             </div>
-            <!-- End Bread crumb -->
-            <!-- Container fluid  -->
-            <div class="container-fluid">
-                <!-- Start Page Content -->
-                <!-- <div class="row">
-                    <div class="col-md-3">
-                        <div class="card bg-primary p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="ti-user f-s-40"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                    <h2 class="color-white"><?php echo $mahasiswairisan ?></h2>
-                                    <p class="m-b-0">Mahasiswa</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card bg-pink p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="ti-user f-s-40"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                    <h2 class="color-white"><?php echo $dosen ?></h2>
-                                    <p class="m-b-0">Dosen</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="card bg-success p-20">
-                            <div class="media widget-ten">
-                                <div class="media-left meida media-middle">
-                                    <span><i class="ti-user f-s-40"></i></span>
-                                </div>
-                                <div class="media-body media-text-right">
-                                    <h2 class="color-white"><?php echo $dosen_tamu ?></h2>
-                                    <p class="m-b-0">Dosen Tamu</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-                <div class="row">
-                    
-                </div>
-
-                <div class="row">
-                    <!-- <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>International Faculty Staff</h4>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="InternationalFacultyStaff" width="600" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>STUDENT - OVERALL</h4>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="chartStudent" width="600" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- /# column -->
-                    <!-- <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>STUDENT - GENDER</h4>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="chartGender" width="600" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="card">
-                            <div class="card-title">
-                                <h4>STUDENT - INBOUND & OUTBOUND</h4>
-                            </div>
-                            <div class="card-body">
-                                <canvas id="chartInOut" width="600" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
-
+            <!-- <div class="container-fluid">
                 
-                        </div>
-                    </div> -->
-                </div>
-                    <!-- /# column -->
+                <div class="row">
                     
-
                 </div>
 
+                <div class="row">
+                
+                </div>
 
-                <!-- End PAge Content -->
-            </div>
-            <!-- End Container fluid  -->
-            <!-- footer -->
-            <footer class="footer"> © 2018 All rights reserved.</footer>
-            <!-- End footer -->
+            </div> -->
         </div>
-        <!-- End Page wrapper  -->
-    </div>
-    <!-- End Wrapper -->
+        <div>
+            
+        <footer class="footer"> © 2018 All rights reserved.</footer>
+        </div>
 
 <?php
 $this->load->view('bar/js');

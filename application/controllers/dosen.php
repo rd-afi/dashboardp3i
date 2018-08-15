@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class dosen extends CI_Controller {
-    private $filename = "import_data"; // Kita tentukan nama filenya
+    private $filename = "import_data";
 
   function __construct(){
 		parent::__construct();
-        // $this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
+    // Me-Load helper, library, dan model yang dibutuhkan
     $this->load->helper(array('form', 'url'));
     $this->load->library('datatables');
     $this->load->model('m_datadsn');
@@ -17,14 +17,18 @@ class dosen extends CI_Controller {
 
 	}
 
+
   public function index(){
+    // Untuk men-set limit menjadi tanpa limit
+    // Untuk mencegah limit memori pada saat me-load data
+    ini_set('memory_limit', '-1');
+    
+    // Mengecek bulan sekarang untuk menentukan Semester ganjil genap
     if (date('m')<=6) {
       $smt = "12";
     } else {
       $smt = "21";
     }
-    ini_set('memory_limit', '-1');
-    $data['dosen'] = $this->m_datadsn->view();
 
       if(isset($_POST['tahun'])){
         $st = $this->input->post('tahun');
@@ -38,7 +42,6 @@ class dosen extends CI_Controller {
         $tahun = $y1;
         $data['dsn'] = $this->m_datadsn->get_dsn($semester,$tahun);
       }else{
-        // $data['bulan'] = date('F');
         $data['semester'] = $smt;
         $data['tahun'] = date('y');
         $data['dsn'] = $this->m_datadsn->get_dsn($smt,date('y'));
@@ -46,18 +49,18 @@ class dosen extends CI_Controller {
     $this->load->view('dosen',$data);
   }
 
+  // UNTUK TAMBAH DATA DOSEN
   public function tambahdosen()
   {
-    $data['dosen'] = $this->m_datadsn->view();
-    // $data['user'] = $this->m_datadsn->tampil_data()->result();
-    // $this->load->view('dosen', array('error' => ' ' ));
-    $this->load->view('tambahdosen', $data);
+    $this->load->view('tambahdosen');
   }
 
+  // UNTUK DOWNLOAD TEMPLATE
   public function download_template(){       
     force_download('template/Template_Data_Dosen.xlsx',NULL);
   }
 
+  // UNTUK UPLOAD EXCEL
   public function aksi_upload(){
     $config['upload_path'] = './excel/';
     $config['allowed_types'] = 'xlsx';
@@ -76,35 +79,33 @@ class dosen extends CI_Controller {
     }
   }
 
-
+  // UNTUK MENAMPILKAN EXCEL YANG SUDAH DI UPLOAD 
   public function form(){
-    $data = array(); // Buat variabel $data sebagai array
+    $data = array();
     
-    if(isset($_POST['preview'])){ // Jika user menekan tombol Preview pada form
-      // lakukan upload file dengan memanggil function upload yang ada di SiswaModel.php
+    if(isset($_POST['preview'])){
       $upload = $this->m_datadsn->upload_file($this->filename);
       
       if($upload['result'] == "success"){ // Jika proses upload sukses
-        // Load plugin PHPExcel nya
-        include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+        include APPPATH.'third_party/PHPExcel/PHPExcel.php'; // Load plugin PHPExcel nya
         
         $excelreader = new PHPExcel_Reader_Excel2007();
         $loadexcel = $excelreader->load('excel/'.$this->filename.'.xlsx'); // Load file yang tadi diupload ke folder excel
         $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
         
-        // Masukan variabel $sheet ke dalam array data yang nantinya akan di kirim ke file form.php
+        // Masukan variabel $sheet ke dalam array data yang nantinya akan di kirim ke view
         // Variabel $sheet tersebut berisi data-data yang sudah diinput di dalam excel yang sudha di upload sebelumnya
         $data['sheet'] = $sheet; 
       }else{ // Jika proses upload gagal
-        $data['upload_error'] = $upload['error']; // Ambil pesan error uploadnya untuk dikirim ke file form dan ditampilkan
+        $data['upload_error'] = $upload['error'];
       }
     }
-    
+    // Meload view tambahdosen dengan membawa data-data pada $data
     $this->load->view('tambahdosen', $data);
   }
   
+  // PROSES IMPORT KE DATABASE DARI EXCEL YANG SUDAH DIUPLOAD
   public function import(){
-    // Load plugin PHPExcel nya
     include APPPATH.'third_party/PHPExcel/PHPExcel.php';
     
     $excelreader = new PHPExcel_Reader_Excel2007();
@@ -116,11 +117,7 @@ class dosen extends CI_Controller {
     
     $numrow = 1;
     foreach($sheet as $row){
-      // Cek $numrow apakah lebih dari 1
-      // Artinya karena baris pertama adalah nama-nama kolom
-      // Jadi dilewat saja, tidak usah diimport
       if($numrow > 1){
-        // Kita push (add) array data ke variabel data
         array_push($data, [
           'schoolyear' => $row['A'],
           'semester' => $row['B'],
@@ -135,10 +132,7 @@ class dosen extends CI_Controller {
       
       $numrow++; // Tambah 1 setiap kali looping
     }
-
-    // Panggil fungsi insert_multiple yg telah kita buat sebelumnya di model
     $this->m_datadsn->insert_multiple($data);
-    
-    redirect("dosen"); // Redirect ke halaman awal (ke controller siswa fungsi index)
+    redirect("dosen");
   }
 }

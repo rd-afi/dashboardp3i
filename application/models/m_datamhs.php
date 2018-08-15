@@ -1,20 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class m_datamhs extends CI_Model {
-    public function view(){
-        return $this->db->get('mahasiswa_sisfo')->result();
-    }
-    public function view_io(){
-        return $this->db->get('mahasiswa_io')->result();
-    }
-
-    public function getdata(){
-        return $this->db->get('mahasiswa_sisfo');
-    }
-    public function getdata_io(){
-        return $this->db->get('mahasiswa_io');
-    }
-
+    
     //------------------------- SISFO -------------------------
     
     // Fungsi untuk melakukan proses upload file

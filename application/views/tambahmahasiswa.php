@@ -4,10 +4,7 @@
 <?php
 $this->load->view('bar/head');
 ?>
-
-        <!-- Page wrapper  -->
         <div class="page-wrapper">
-            <!-- Bread crumb -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
                     <h3 class="text-primary">Tambah Data Mahasiswa (SISFO)</h3> </div>
@@ -18,8 +15,6 @@ $this->load->view('bar/head');
                     </ol>
                 </div>
             </div>
-            <!-- End Bread crumb -->
-            <!-- Container fluid  -->
             <div class="container-fluid">
 
             <div class="card-content">
@@ -32,8 +27,6 @@ $this->load->view('bar/head');
                     <a href="<?php echo base_url().'template_mhs' ?>" class="btn btn-warning m-b-10 m-l-5 btn-sm">Download Template</a>
                 </div>
             </div>
-
-                <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
@@ -50,27 +43,23 @@ $this->load->view('bar/head');
                         ?> 
                             <div class="card">
                                 <div class="card-body p-b-0">
-                                    <!-- <h4 class="card-title">Customtab2 Tab</h4> -->
-                                    <!-- Nav tabs -->
                                     <ul class="nav nav-tabs customtab2" role="tablist">
                                         <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#upload" role="tab"><span class="hidden-sm-up"><i class="ti-email"></i></span> <span class="hidden-xs-down">Uploads</span></a> </li>
-                                        <!-- <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#input" role="tab"><span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Input</span></a> </li> -->
                                     </ul>
-                                    <!-- Tab panes -->
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="upload" role="tabpanel">
                                             <div class="p-20">
-                                                    <div class="button-list">
-                                                <!-- <form action="<?php echo base_url();?>datadsn/importir/" method="post" enctype="multipart/form-data"> -->
+                                                <div class="button-list">
+                                                <!-- UPLOAD EXCEL -->
                                                 <form action="<?php echo base_url();?>mahasiswa/upload/" method="post" enctype="multipart/form-data">
                                                         <div class="btn-group">
                                                             <input class="btn btn-success" type="file" name="file"/>
                                                             <input class="btn btn-primary" type="submit" name="preview" value="Upload file"/>
                                                         </div>
                                                 </form>
-                                                <!-- <button class="btn btn-success btn-rounded ">Preview</button> -->
-                                                    </div>
+                                                </div>
                                             </div>
+                                            <!-- PREVIEW TABEL -->
                                             <?php
                                             if(isset($_POST['preview'])){ // Jika user menekan tombol Preview pada form 
                                                 if(isset($upload_error)){ // Jika proses upload gagal
@@ -117,23 +106,23 @@ $this->load->view('bar/head');
                                                 // $sheet adalah variabel yang dikirim dari controller
                                                 foreach($sheet as $row){ 
                                                     // Ambil data pada excel sesuai Kolom
-                                                    $schoolyear = $row['A']; // Ambil data nama
-                                                    $semester = $row['B']; // Ambil data gender
-                                                    $nim = $row['C']; // Ambil data jenis kelamin
-                                                    $name = $row['D']; // Ambil data alamat
-                                                    $generation = $row['E']; // Ambil data alamat
-                                                    $faculty = $row['F']; // Ambil data alamat
-                                                    $study_program = $row['G']; // Ambil data alamat
-                                                    $degree = $row['H']; // Ambil data alamat
-                                                    $gender = $row['I']; // Ambil data alamat
-                                                    $status = $row['J']; // Ambil data alamat
-                                                    $fee = $row['K']; // Ambil data alamat
-                                                    $country_of_origin = $row['L']; // Ambil data alamat
-                                                    $univ_origin = $row['M']; // Ambil data alamat
-                                                    $univ_dest = $row['N']; // Ambil data alamat
-                                                    $exchange_period = $row['O']; // Ambil data alamat
-                                                    $inf = $row['P']; // Ambil data alamat
-                                                    $inf2 = $row['Q']; // Ambil data alamat
+                                                    $schoolyear = $row['A'];
+                                                    $semester = $row['B'];
+                                                    $nim = $row['C'];
+                                                    $name = $row['D'];
+                                                    $generation = $row['E'];
+                                                    $faculty = $row['F'];
+                                                    $study_program = $row['G'];
+                                                    $degree = $row['H'];
+                                                    $gender = $row['I'];
+                                                    $status = $row['J'];
+                                                    $fee = $row['K'];
+                                                    $country_of_origin = $row['L'];
+                                                    $univ_origin = $row['M'];
+                                                    $univ_dest = $row['N'];
+                                                    $exchange_period = $row['O'];
+                                                    $inf = $row['P'];
+                                                    $inf2 = $row['Q'];
                                                     
                                                     // Cek jika semua data tidak diisi
                                                     if(empty($schoolyear) && empty($semester) && empty($nim) && empty($name) && empty($generation) && empty($faculty) && empty($study_program) && empty($degree) && empty($gender) && empty($status) && empty($bpp) && empty($country_of_origin) && empty($univ_origin) && empty($univ_dest) && empty($exchange_period) && empty($inf) && empty($inf2))
@@ -206,14 +195,11 @@ $this->load->view('bar/head');
                                                     });
                                                     </script>
                                                 <?php
-                                                // }else{ // Jika semua data sudah diisi
                                                     echo "<hr>";
                                                     
                                                     // Buat sebuah tombol untuk mengimport data ke database
                                                     echo "<button href='".base_url("mahasiswa")."' class='btn btn-danger btn-default' type='submit' name='cancel'>Cancel</button>";
                                                     echo "<button class='btn btn-primary btn-default pull-right' style='margin-left:10px;' type='submit' name='import'>Import</button>";
-                                                // }
-                                                
                                                 echo "</form>";
 
                                             }
@@ -224,19 +210,10 @@ $this->load->view('bar/head');
                                 </div>
                             </div>
                         </div>
-                    <!-- /# column -->
                 </div>
-                <!-- /# row -->
-
-                <!-- End PAge Content -->
             </div>
-            <!-- End Container fluid  -->
-            <!-- footer -->
             <footer class="footer"> © 2018 All rights reserved</footer>
-            <!-- End footer -->
         </div>
-        <!-- End Page wrapper  -->
-
 
 <?php
 $this->load->view('bar/js');

@@ -36,34 +36,6 @@ function usd($angka){
                                     <form action="<?php echo site_url('isiqsaurp3i')?>" class="form-inline" method="POST">
                                     <table class="table-responsive display nowrap" style="width:100%">
                                     <div class="form-group">
-                                        <!-- <tr>
-                                            <td class="p-10">
-                                            <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
-                                                <option selected="" disabled=""> - Semester - </option>
-                                                <option value="12">Ganjil - Genap</option>
-                                                <option value="21">Genap - Ganjil</option>
-                                            </select>
-                                            </td>
-
-                                            <td class="p-10" style="width:100%">
-                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
-                                            <option selected="" disabled="">Pilih Tahun</option>
-                                            <?php
-                                                for($i=2016;$i<=date('Y');$i++){
-                                                if($i == date('Y')){
-                                                    echo '<option selected="" value="'.$i.'">'.$i.'</option>';
-                                                }else{
-                                                    echo '<option value="'.$i.'">'.$i.'</option>';
-                                                }   
-                                                }
-                                            ?>
-                                            </select>
-                                            </td>
-
-                                            <td class="p-10" style="width:100%">
-                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
-                                            </td>
-                                        </tr> -->
                                         <tr>
                                             <td class="p-10" style="width:100%">
                                             <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
@@ -93,10 +65,6 @@ function usd($angka){
                                 </div>
                             </div>
                         <div class="card">
-                            <!-- <div class="card-title">
-                                <h4></h4>
-
-                            </div> -->
                             <div class="card-body">
                                 <center><h4> Periode Semester <?php
                                 $year = substr($tahun, 0,2);
@@ -134,13 +102,10 @@ function usd($angka){
                                                 </tr>
                                                 <tr>
                                                     <td>International Faculty Staff</td>
-                                                    <!-- <td> <?php echo $staff_international ?> </td> -->
                                                     <td>0</td>
                                                     <td> <?php echo $visiting_inbound_parttime ?> </td>
                                                     <td> <?php echo $visiting_inbound_parttime ?> </td>
                                                     <td> <?php echo $visiting_inbound_parttime ?> </td>
-                                                    <!-- <td> <?php echo $staff_international ?> </td> -->
-                                                    <!-- <td> <?php echo $staff_international ?> </td> -->
                                                 </tr>
                                                 <tr>
                                                     <td>Visiting International Faculty Staff - Inbound</td>
@@ -326,7 +291,6 @@ function usd($angka){
                                                         echo rupiah(round((($fees_undergraduate_students_international->fee)+0)/$undergraduate_international_students));
                                                     }
                                                     ?></td>
-                                                    <!-- <td colspan="4" align="center">N/A</td> -->
                                                     <td style="display: none"></td>
                                                     <td style="display: none"></td>
                                                     <td colspan="2" align="center"><?php
@@ -347,7 +311,6 @@ function usd($angka){
                                                         echo rupiah(round((($fees_undergraduate_student_domestic->fee)+0)/$res_undergraduate_domestic));
                                                     }
                                                     ?></td>
-                                                    <!-- <td colspan="4" align="center">N/A</td> -->
                                                     <td style="display: none"></td>
                                                     <td style="display: none"></td>
                                                     <td colspan="2" align="center"><?php
@@ -363,7 +326,6 @@ function usd($angka){
                                                     <td>Graduate / Postgraduate Fees - Domestic</td>
                                                     <td colspan="2" align="center"><?php
                                                     echo rupiah(round((($fees_grapost_student_domestic->fee)+0)/$res_grapost_domestic)) ?></td>
-                                                    <!-- <td colspan="4" align="center">N/A</td> -->
                                                     <td style="display: none"></td>
                                                     <td style="display: none"></td>
                                                     <td colspan="2" align="center"><?php

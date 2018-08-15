@@ -18,10 +18,7 @@ $this->load->view('bar/head');
                     </ol>
                 </div>
             </div>
-            <!-- End Bread crumb -->
-            <!-- Container fluid  -->
             <div class="container-fluid">
-                <!-- Start Page Content -->
                 <div class="row">
                     <div class="col-md-12">
                         <?php 
@@ -41,35 +38,8 @@ $this->load->view('bar/head');
                                     <form action="<?php echo site_url('mahasiswa')?>" class="form-inline" method="POST">
                                     <table class="table-responsive display nowrap" style="width:100%">
                                     <div class="form-group">
-                                        <!-- <tr>
-                                            <td class="p-10">
-                                            <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
-                                                <option selected="" disabled=""> - Semester - </option>
-                                                <option value="12">Ganjil - Genap</option>
-                                                <option value="21">Genap - Ganjil</option>
-                                            </select>
-                                            </td>
-
-                                            <td class="p-10" style="width:100%">
-                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
-                                            <option selected="" disabled="">Pilih Tahun</option>
-                                            <?php
-                                                for($i=2016;$i<=date('Y');$i++){
-                                                if($i == date('Y')){
-                                                    echo '<option selected="" value="'.$i.'">'.$i.'</option>';
-                                                }else{
-                                                    echo '<option value="'.$i.'">'.$i.'</option>';
-                                                }   
-                                                }
-                                            ?>
-                                            </select>
-                                            </td>
-
-                                            <td class="p-10" style="width:100%">
-                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
-                                            </td>
-                                        </tr> -->
                                         <tr>
+                                            <!-- DROPDOWN SEMESTER & TAHUN -->
                                             <td class="p-10" style="width:100%">
                                             <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
                                             <option selected="" disabled="">Pilih Semester & Tahun</option>
@@ -77,12 +47,8 @@ $this->load->view('bar/head');
                                                 for($i=16;$i<=date('y');$i++){
                                                     $x = $i + 1;
                                                     $y = $x + 1;
-                                                // if($i == date('y')){
-                                                //     echo '<option selected disabled>Pilih Tahun Semester</option>';
-                                                // }else{
                                                     echo '<option value="1-'.$i.$x.'/2-'.$i.$x.'"> Ganjil&nbsp;&ensp;- '.$i.'/'.$x.' | Genap&nbsp;- '.$i.'/'.$x.'</option>';
                                                     echo '<option value="2-'.$i.$x.'/1-'.$x.$y.'"> Genap&nbsp;- '.$i.'/'.$x.' | Ganjil&nbsp;&nbsp;&nbsp;- '.$x.'/'.$y.'</option>';
-                                                // }   
                                                 }
                                             ?>
                                             </select>
@@ -97,6 +63,7 @@ $this->load->view('bar/head');
                                     </form>
                                 </div>
                             </div>
+                            <!-- TABEL -->
                             <div class="card">
                                 <center><h4> Periode Semester <?php
                                 $year = substr($tahun, 0,2);
@@ -166,18 +133,10 @@ $this->load->view('bar/head');
                                 </div>
                             </div>
                         </div>
-                    <!-- /# column -->
                 </div>
-                <!-- /# row -->
-
-                <!-- End PAge Content -->
             </div>
-            <!-- End Container fluid  -->
-            <!-- footer -->
             <footer class="footer"> © 2018 All rights reserved.</footer>
-            <!-- End footer -->
         </div>
-        <!-- End Page wrapper  -->
 
 <?php
 $this->load->view('bar/js');
