@@ -1,6 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+<style> 
+#example1 {
 
+background: linear-gradient(0deg, #ffffff, #ececec);
+background-size: 400% 400%;
+
+-webkit-animation: gradientAni 15s ease infinite;
+-moz-animation: gradientAni 15s ease infinite;
+-o-animation: gradientAni 15s ease infinite;
+animation: gradientAni 15s ease infinite;
+}
+
+@-webkit-keyframes gradientAni {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@-moz-keyframes gradientAni {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@-o-keyframes gradientAni {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@keyframes gradientAni { 
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+</style>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,6 +48,13 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/helper.css') ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>"/>
+    <!-- Toastr -->
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/lib/toastr/toastr.min.css') ?>"/>
+    <script src="<?php echo base_url('assets/js/lib/jquery/jquery.min.js') ?>"></script>
+    <!-- scripit init - Toastr -->
+    <script src="<?php echo base_url('assets/js/lib/toastr/toastr.min.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/lib/toastr/toastr.init.js') ?>"></script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:** -->
     <!--[if lt IE 9]>
@@ -31,7 +70,26 @@
 			<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
     </div>
     <!-- Main wrapper  -->
+    <?php
+    $log_stat = $this->session->flashdata('login');
+    if($this->session->userdata('login') == "gagal"){
+      ?>
+      <script type="text/javascript">
+        // $(document).ready( function() { alert('Login Gagal'); } );
+        $(document).ready( login_gagal() );
+      </script>
+      <?php
+      } else if ($this->session->userdata('login') == "kosong") {
+        ?>
+        <script type="text/javascript">
+        // $(document).ready( function() { alert('Login Gagal'); } );
+        $(document).ready( login_kosong() );
+        </script>
+        <?php
+      }
+    ?>
     <div id="main-wrapper">
+    <div id="example1">
 
         <div class="unix-login">
             <div class="container-fluid">
@@ -60,11 +118,12 @@
                 </div>
             </div>
         </div>
-
+    </div>
     </div>
     <!-- End Wrapper -->
+
     <!-- All Jquery -->
-    <script src="<?php echo base_url('assets/js/lib/jquery/jquery.min.js') ?>"></script>
+    
     <!-- Bootstrap tether Core JavaScript -->
     <script src="<?php echo base_url('assets/js/lib/bootstrap/js/popper.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/lib/bootstrap/js/bootstrap.min.js') ?>"></script>

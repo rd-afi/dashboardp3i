@@ -133,23 +133,23 @@ class mahasiswa extends CI_Controller {
       if($numrow > 1){
         // Kita push (add) array data ke variabel data
         array_push($data, [
-        	  'schoolyear' => $row['A'], // Ambil data nama
-            'semester' => $row['B'], // Ambil data gender
-            'nim' => $row['C'], // Ambil data jenis kelamin
-            'name' => $row['D'], // Ambil data alamat
-            'generation' => $row['E'], // Ambil data alamat
-            'faculty' => $row['F'], // Ambil data alamat
-            'study_program' => $row['G'], // Ambil data alamat
-            'degree' => $row['H'], // Ambil data alamat
-            'gender' => $row['I'], // Ambil data alamat
-            'status' => $row['J'], // Ambil data alamat
-            'fee' => $row['K'], // Ambil data alamat
-            'country_of_origin' => $row['L'], // Ambil data alamat
-            'univ_origin' => $row['M'], // Ambil data alamat
-            'univ_dest' => $row['N'], // Ambil data alamat
-            'exchange_period' => $row['O'], // Ambil data alamat
-            'inf' => $row['P'], // Ambil data alamat
-            'inf2' => $row['Q'] // Ambil data alamat
+        	  'schoolyear' => $row['A'],
+            'semester' => $row['B'],
+            'nim' => $row['C'],
+            'name' => $row['D'],
+            'generation' => $row['E'],
+            'faculty' => $row['F'],
+            'study_program' => $row['G'],
+            'degree' => $row['H'],
+            'gender' => $row['I'],
+            'status' => $row['J'],
+            'fee' => $row['K'],
+            'country_of_origin' => $row['L'],
+            'univ_origin' => $row['M'],
+            'univ_dest' => $row['N'],
+            'exchange_period' => $row['O'],
+            'inf' => $row['P'],
+            'inf2' => $row['Q']
         ]);
       }
       

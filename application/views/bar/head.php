@@ -16,7 +16,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/helper.css') ?>"/>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css') ?>"/>
-
+    
     <noscript><link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/noJS.css') ?>"/></noscript> 
    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
