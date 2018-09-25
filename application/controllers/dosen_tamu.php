@@ -38,6 +38,7 @@ class dosen_tamu extends CI_Controller {
         $data['tahun'] = $y1;
         $semester = $s1.$s2;
         $tahun = $y1;
+        // $this->dsn_tamu();
         $data['dsn_tamu'] = $this->m_datadsn_tamu->get_dsn_tamu($semester,$tahun);
       }else{
         // $data['bulan'] = date('F');
@@ -47,6 +48,31 @@ class dosen_tamu extends CI_Controller {
       }
     $this->load->view('dosen_tamu',$data);
   }
+
+  // public function dsn_tamu(){
+  //   if (date('m')<=6) {
+  //     $smt = "12";
+  //   } else {
+  //     $smt = "21";
+  //   }
+  //     if(isset($_POST['tahun'])){
+  //       $st = $this->input->post('tahun');
+  //       $y1 = substr($st, 2, 4);
+  //       $y2 = substr($st, 9, 4);
+  //       $s1 = substr($st, 0, 1);
+  //       $s2 = substr($st, 7, 1);
+  //       $data['semester'] = $s1.$s2;
+  //       $data['tahun'] = $y1;
+  //       $semester = $s1.$s2;
+  //       $tahun = $y1;
+  //       $dsn_tamu = $this->m_datadsn_tamu->get_dsn_tamu($semester,$tahun);
+  //     }else{
+  //       $data['semester'] = $smt;
+  //       $data['tahun'] = date('y');
+  //       $dsn_tamu = $this->m_datadsn_tamu->get_dsn_tamu($smt,date('y'));
+  //     }
+  //   json_encode($dsn_tamu);
+  // }
 
   public function tambahdosen()
   {

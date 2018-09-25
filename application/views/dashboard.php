@@ -16,17 +16,128 @@ $this->load->view('bar/head');
                     </ol>
                 </div>
             </div>
-            <!-- <div class="container-fluid">
-                
+            <div class="container-fluid"> 
+                <div class="alert alert-light alert-dismissible fade show">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <p>Data Jumlah Mahasiswa tiap Prodi di tiap Fakultas</p>
+                    <hr>
+                    <p><i>Data yang masuk pada 2018</i></p>
+                </div>
+                <!-- FEB FIF FIK FIT FKB FRI FTE -->
                 <div class="row">
-                    
+                    <!-- column FEB -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <h4 class="card-title">FEB</h4>
+                            <div class="card-body browser">
+                                <?php foreach($feb as $feb){ ?>
+                                <hr>
+                                <p class="f-w-600"><?php echo $feb->study_program ?> <span class="pull-right"><?php echo $feb->total; ?></span></p>
+                                <?php }  ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column FIF -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <h4 class="card-title">FIF</h4>
+                            <div class="card-body browser">
+                                <?php foreach($fif as $fif){ ?>
+                                <hr>
+                                <p class="f-w-600"><?php echo $fif->study_program ?> <span class="pull-right"><?php echo $fif->total; ?></span></p>
+                                <?php }  ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column FIK -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <h4 class="card-title">FIK</h4>
+                            <div class="card-body browser">
+                                <?php foreach($fik as $fik){ ?>
+                                <hr>
+                                <p class="f-w-600"><?php echo $fik->study_program ?> <span class="pull-right"><?php echo $fik->total; ?></span></p>
+                                <?php }  ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
                 </div>
 
                 <div class="row">
-                
+                    <!-- column FIT -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <h4 class="card-title">FIT</h4>
+                            <div class="card-body browser">
+                                <?php foreach($fit as $fit){ ?>
+                                <hr>
+                                <p class="f-w-600"><?php echo $fit->study_program ?> <span class="pull-right"><?php echo $fit->total; ?></span></p>
+                                <?php }  ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column FKB -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <h4 class="card-title">FKB</h4>
+                            <div class="card-body browser">
+                                <?php foreach($fkb as $fkb){ ?>
+                                <hr>
+                                <p class="f-w-600"><?php echo $fkb->study_program ?> <span class="pull-right"><?php echo $fkb->total; ?></span></p>
+                                <?php }  ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
+                    <!-- column FRI -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <h4 class="card-title">FRI</h4>
+                            <div class="card-body browser">
+                                <?php foreach($fri as $fri){?>
+                                <hr>
+                                <p class="f-w-600"><?php echo $fri->study_program ?> <span class="pull-right"><?php echo $fri->total; ?></span></p>
+                                <?php }  ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
                 </div>
 
-            </div> -->
+                <div class="row">
+                    <!-- column FTE -->
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <h4 class="card-title">FTE</h4>
+                            <div class="card-body browser">
+                                <?php foreach($fte as $fte){
+                                echo "<hr>";
+                                $total = $fte->total;
+                                $end = 0;
+                                // foreach ($total_all as $t) { $all = $t->total_all; }
+                                // echo $total ." - ". $all ."<br>";
+                                // $persen = ($total/$all)*100;
+                                
+                                ?>
+                                <p class="f-w-600"><?php echo $fte->study_program ?> <span class="pull-right"><?php echo $total; ?></span></p>
+                                <!-- <div class="progress ">
+                                    <?php 
+                                    echo "<div role='progressbar' style='width:".$total."%; height:8px;'' class='progress-bar bg-danger wow animated progress-animated'> <span class='sr-only'>60% Complete</span> </div>";
+                                     ?>
+                                </div> -->
+                                <?php }  ?>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- column -->
+                </div>
+            </div>
+
+            </div>
         </div>
         <div>
             

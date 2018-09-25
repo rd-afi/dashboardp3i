@@ -28,6 +28,45 @@ class m_datamhs extends CI_Model {
             return $return;
         }
     }
+
+    // DASHBOARD FEB FIF FIK FIT FKB FRI FTE
+    function f_feb(){
+        $hasil = $this->db->query("SELECT faculty, study_program, COUNT(faculty) AS total FROM mahasiswa_sisfo where faculty = 'FEB' AND ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2)) AND (status = 'STUDENT' or status = 'EXCHANGE STUDENT INBOUND') GROUP BY study_program");
+        return $hasil->result();
+    }
+    function f_fif(){
+        $hasil = $this->db->query("SELECT faculty, study_program, COUNT(faculty) AS total FROM mahasiswa_sisfo where faculty = 'FIF' AND ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2)) AND (status = 'STUDENT' or status = 'EXCHANGE STUDENT INBOUND') GROUP BY study_program");
+        return $hasil->result();
+    }
+    function f_fik(){
+        $hasil = $this->db->query("SELECT faculty, study_program, COUNT(faculty) AS total FROM mahasiswa_sisfo where faculty = 'FIK' AND ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2)) AND (status = 'STUDENT' or status = 'EXCHANGE STUDENT INBOUND') GROUP BY study_program");
+        return $hasil->result();
+    }
+    function f_fit(){
+        $hasil = $this->db->query("SELECT faculty, study_program, COUNT(faculty) AS total FROM mahasiswa_sisfo where faculty = 'FIT' AND ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2)) AND (status = 'STUDENT' or status = 'EXCHANGE STUDENT INBOUND') GROUP BY study_program");
+        return $hasil->result();
+    }
+    function f_fkb(){
+        $hasil = $this->db->query("SELECT faculty, study_program, COUNT(faculty) AS total FROM mahasiswa_sisfo where faculty = 'FKB' AND ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2)) AND (status = 'STUDENT' or status = 'EXCHANGE STUDENT INBOUND') GROUP BY study_program");
+        return $hasil->result();
+    }
+    function f_fri(){
+        $hasil = $this->db->query("SELECT faculty, study_program, COUNT(faculty) AS total FROM mahasiswa_sisfo where faculty = 'FRI' AND ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2)) AND (status = 'STUDENT' or status = 'EXCHANGE STUDENT INBOUND') GROUP BY study_program");
+        return $hasil->result();
+    }
+    function f_fte(){
+        $hasil = $this->db->query("SELECT faculty, study_program, COUNT(faculty) AS total FROM mahasiswa_sisfo where faculty = 'FTE' AND ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2)) AND (status = 'STUDENT' or status = 'EXCHANGE STUDENT INBOUND') GROUP BY study_program");
+        return $hasil->result();
+    }
+    function prodi_all_total(){
+        $hasil = $this->db->query("SELECT faculty, study_program, COUNT(study_program) AS total FROM mahasiswa_sisfo where ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2)) GROUP BY study_program");
+        return $hasil->result();
+    }
+    function prodi_all_total_all(){
+        $hasil = $this->db->query("SELECT COUNT(study_program) AS total_all FROM mahasiswa_sisfo where ((schoolyear = 1718 AND semester = 1) OR (schoolyear = 1718 AND semester = 2))");
+        return $hasil->result();
+    }
+    
     
     // Buat sebuah fungsi untuk melakukan insert lebih dari 1 data
     public function insert_multiple($data){

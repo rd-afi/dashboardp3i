@@ -41,34 +41,6 @@ $this->load->view('bar/head');
                                     <form action="<?php echo site_url('dosen_tamu')?>" class="form-inline" method="POST">
                                     <table class="table-responsive display nowrap" style="width:100%">
                                     <div class="form-group">
-                                        <!-- <tr>
-                                            <td class="p-10">
-                                            <select id="semester" name="semester" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
-                                                <option selected="" disabled=""> - Semester - </option>
-                                                <option value="12">Ganjil - Genap</option>
-                                                <option value="21">Genap - Ganjil</option>
-                                            </select>
-                                            </td>
-
-                                            <td class="p-10" style="width:100%">
-                                            <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
-                                            <option selected="" disabled="">Pilih Tahun</option>
-                                            <?php
-                                                for($i=2016;$i<=date('Y');$i++){
-                                                if($i == date('Y')){
-                                                    echo '<option selected="" value="'.$i.'">'.$i.'</option>';
-                                                }else{
-                                                    echo '<option value="'.$i.'">'.$i.'</option>';
-                                                }   
-                                                }
-                                            ?>
-                                            </select>
-                                            </td>
-
-                                            <td class="p-10" style="width:100%">
-                                                <button type="submit" class="btn btn-primary btn-md m-b-5 m-l-5 pull-right"> View </button>
-                                            </td>
-                                        </tr> -->
                                         <tr>
                                             <td class="p-10" style="width:100%">
                                             <select name="tahun" required class="btn btn-pink btn-outline m-b-10 m-l-5 form-control">
@@ -164,6 +136,28 @@ $this->load->view('bar/head');
                 </div>
                 <!-- /# row -->
 
+                <div class="card">
+                    <table id="jsontab" class="table table-responsive table-striped table-bordered table-hover display nowrap" >
+                        <thead>
+                            <tr>
+                            <th>No</th>
+                            <th>School Year</th>
+                            <th>Semester</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Country of Origin</th>
+                            <th>Institution</th>
+                            <th>Event</th>
+                            <th>Position</th>
+                            <th>Education</th>
+                            <th>Time Period</th>
+                            <th>Event</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+
                 <!-- End PAge Content -->
             </div>
             <!-- End Container fluid  -->
@@ -183,4 +177,12 @@ $this->load->view('bar/js');
     $(document).ready(function() {
         $('#myTable').DataTable();
     } );
+
+    // table = $('#jsontab').DataTable({ 
+    //     "ajax": {
+    //         "url": "<?php echo site_url('dosen_tamu/dsn_tamu')?>",
+    //         "dataSrc": "tableData"
+    //     }
+
+    // });
 </script>
